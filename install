@@ -1,0 +1,110 @@
+# Install Script for all my junk
+# Made with <3 by Multipixelone
+# Set all Variables
+INSTALL_PKGS="arc-theme unzip dictd git firefox dict-gcide python3 python3-pip steam gimp filezilla audacity gparted gdebi-core vlc autoconf keepass2 automake vim sudo"
+# HAPPY GREETING
+echo "Multipixelone Dotfiles i3wm Installer"
+echo "MAKE SURE YOU ARE RUNNING AS ROOT"
+sleep 2s
+
+# Gotta have Root
+#if (( $EUID != 0 )); then
+#    echo "Please run as root"
+#    exit
+#fi
+
+# Display install message
+[ -r /etc/lsb-release ] && . /etc/lsb-release
+
+if [ -z "$DISTRIB_DESCRIPTION" ] && [ -x /usr/bin/lsb_release ]; then
+        # Fall back to using the very slow lsb_release utility
+        DISTRIB_DESCRIPTION=$(lsb_release -s -d)
+fi
+
+echo
+printf "Installing on: %s (%s %s %s)\n" "$DISTRIB_DESCRIPTION" "$(uname -o)" "$(uname -r)" "$(uname -m)"
+sleep 2s
+
+# Check for package managers
+command -v apt-get >/dev/null 2>&1 || { echo >&2 "apt-get isn't installed. Aborting"; exit 1; }
+command -v snap >/dev/null 2>&1 || { apt install snapd; }
+
+# Install all updates first
+apt-get --yes update && apt-get --yes upgrade
+
+# Install All Applications
+for i in $INSTALL_PKGS; do
+  sudo apt-get install -y $i
+done
+
+# Install powerline for vim
+pip3 install powerline-status
+
+# Setup pywal
+pip3 install pywal
+
+# Setup Downloads
+mkdir -p ~/Downloads
+cd ~/Downloads
+
+# Install Discord
+wget "https://dl.discordapp.net/apps/linux/0.0.5/discord-0.0.5.deb" -O discord.deb
+gdebi -nq discord.deb
+
+# Install GPMDP
+wget "https://github.com/MarshallOfSound/Google-Play-Music-Desktop-Player-UNOFFICIAL-/releases/download/v4.5.0/google-play-music-desktop-player_4.5.0_amd64.deb" -O GPMDP.deb
+gdebi -nq GPMDP.deb
+
+# Build i3-gaps
+mkdir -p ~/Github
+cd ~/Github
+git clone https://github.com/Airblader/i3.git i3-gaps
+apt-get install --yes libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm0 libxcb-xrm-dev automake
+cd i3-gaps
+autoreconf --force --install
+rm -rf build/
+mkdir -p build && cd build/
+../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
+make
+sudo make install
+
+# Install Papirus Icons
+wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-icon-theme/master/install.sh | sh
+
+# Install Mailspring :)
+snap install Mailspring
+
+# Overpass Font
+cd ~/dotfiles
+wget https://github.com/RedHatBrand/Overpass/releases/download/3.0.2/overpass-desktop-fonts.zip
+unzip overpass-desktop-fonts.zip
+rm overpass-desktop-fonts.zip
+cd overpass
+mv * /usr/share/fonts/
+cd ../overpass-mono
+mv * /usr/share/fonts
+fc-cache -f -v
+cd ~/dotfiles
+rm -rv overpass overpass-mono
+
+# Iosevka Font
+cd ~/dotfiles
+wget https://github.com/be5invis/Iosevka/releases/download/v1.14.3/02-iosevka-term-1.14.3.zip -O iosevka.zip
+unzip iosevka.zip
+rm iosevka.zip
+cd ttf/
+mv * /usr/share/fonts/
+fc-cache -f -v
+cd ~/dotfiles
+rm -rv ttf/ ttf-unhinted/ woff/ woff2/
+
+# Stow
+cd ~/dotfiles
+stow bash
+stow i3
+stow pics
+stow vim
+
+# End
+clear
+echo "THANKS FOR USING MY SCRIPT <3"
