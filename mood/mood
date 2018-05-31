@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# Loop rain and coffeeshop ambiance
+mplayer /opt/mood/rainymood.mp3 -loop 0 -volume 45 &
+#mplayer cafeBastille_paris_mp3.mp3 -loop 0 -volume 65 &
+
+# Play appropriate radio station
+#mplayer -playlist /opt/mood/jazz.pls -volume 55
+#mplayer -playlist https://radiohyrule.com/listen.aac.m3u -volume 55
+
+# Check which radio to play from
+if [ "$1" = "" ]; then
+    mplayer -playlist /opt/mood/classical.pls -volume 55
+else
+    mplayer -playlist https://radiohyrule.com/listen.aac.m3u -volume 55
+fi
+
+# Stop all mplayer streams when aborting
+killall mplayer
