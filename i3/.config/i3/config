@@ -22,6 +22,50 @@ gaps outer 6
 font pango:Overpass 10
 #font pango:Overpass 12
 
+# Color palette used for the terminal ( ~/.Xresources file )
+# Colors are gathered based on the documentation:
+# https://i3wm.org/docs/userguide.html#xresources
+# Change the variable name at the place you want to match the color
+# of your terminal like this:
+# [example]
+# If you want your bar to have the same background color as your 
+# terminal background change the line 362 from:
+# background #14191D
+# to:
+# background $term_background
+# Same logic applied to everything else.
+set_from_resource $term_background background
+set_from_resource $term_foreground foreground
+set_from_resource $term_color0     color0
+set_from_resource $term_color1     color1
+set_from_resource $term_color2     color2
+set_from_resource $term_color3     color3
+set_from_resource $term_color4     color4
+set_from_resource $term_color5     color5
+set_from_resource $term_color6     color6
+set_from_resource $term_color7     color7
+set_from_resource $term_color8     color8
+set_from_resource $term_color9     color9
+set_from_resource $term_color10    color10
+set_from_resource $term_color11    color11
+set_from_resource $term_color12    color12
+set_from_resource $term_color13    color13
+set_from_resource $term_color14    color14
+set_from_resource $term_color15    color15
+
+#colors{
+#        background #202A2E
+#        statusline #F9FAF9
+#        separator  #454947
+#
+#                          border  backgr. text
+#        focused_workspace  #F9FAF9 #16a085 #292F34
+#        active_workspace   #595B5B #353836 #FDF6E3
+#        inactive_workspace #595B5B #202A2E #EEE8D5
+#        binding_mode       #16a085 #2C2C2C #F9FAF9
+#        urgent_workspace   #16a085 #FDF6E3 #E5201D
+#    }
+#}
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -109,7 +153,7 @@ bindsym $mod+c exec --no-startup-id firefox bsd.instructure.com
 #bindsym $mod+o exec --no-startup-id firefox "https://onedrive.live.com/edit.aspx?resid=BF4A7567A03738B8!8466&cid=bf4a7567a03738b8&app=OneNote&wdorigin=ondcauth2,ondcnotebooks,ondchrd"
 bindsym Mod4+e exec --no-startup-id nautilus
 #bindsym $mod+m exec --no-startup-id firefox http://rainymood.com/
-bindsym $mod+m exec --no-startup-id uxterm -e 'mplayer /opt/mood/rainymood.mp3 -loop 0 -volume 70'
+bindsym $mod+m exec --no-startup-id gnome-terminal -- mplayer /home/tunnel/dotfiles/mood/0.m4a -loop 0 -volume 100
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -165,6 +209,22 @@ for_window [class="Skype"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
+for_window [class="Google Play Music Desktop Player"] floating enable border normal
+for_window [class="Gnome-terminal"] floating enable
+
+# Set restart, shutdown, and locking stuff (From Manjaro)
+bindsym $mod+0 mode "$mode_system"
+set $mode_system (l)ock, (e)xit, (r)eboot, (Shift+s)hutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3lock-fancy, mode "default"
+    bindsym e exec --no-startup-id mate-session-save --logout, mode "default"
+    bindsym r exec --no-startup-id reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id shutdown now, mode "default"
+
+    # exit system mode: "Enter" or "Escape"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -176,7 +236,7 @@ bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10; exec firefox --new-window drive.google.com --new-window bsd.instructure.com
+#bindsym $mod+- workspace $ws10#; exec firefox --new-window drive.google.com --new-window bsd.instructure.com
 
 # School Shortcut
 #bindsym $mod+s workspace $ws10
