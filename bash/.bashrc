@@ -7,7 +7,7 @@ iatest=$(expr index "$-" i)
 
 #(wal -e -r -t &)
 (wal -e -t -i ~/Documents/Backgrounds/Zelda.jpg &) &> /dev/null
-(wal -n -e -t -i ~/Documents/Backgrounds/16.jpg &) &> /dev/null
+#(wal -n -e -t -i ~/Documents/Backgrounds/16.jpg &) &> /dev/null
 #while sleep 1;do tput sc;tput cup 0 $(($(tput cols)-29));date;tput rc;done &
 
 transfer() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi
