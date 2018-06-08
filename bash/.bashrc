@@ -6,8 +6,8 @@ iatest=$(expr index "$-" i)
 #######################################################
 
 #(wal -e -r -t &)
-(wal -e -t -i ~/Documents/Backgrounds/Zelda.jpg &) &> /dev/null
-(wal -n -e -t -i ~/Documents/Backgrounds/16.jpg &) &> /dev/null
+(wal -e -t -i ~/Documents/Backgrounds/Zelda2.jpg &) &> /dev/null
+#(wal -n -e -t -i ~/Documents/Backgrounds/16.jpg &) &> /dev/null
 #while sleep 1;do tput sc;tput cup 0 $(($(tput cols)-29));date;tput rc;done &
 
 transfer() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi
@@ -61,7 +61,7 @@ shopt -s histappend
 PROMPT_COMMAND='history -a'
 
 # Allow ctrl-S for history navigation (with ctrl-R)
-stty -ixon
+#stty -ixon
 
 # Ignore case on auto-completion
 # Note: bind used instead of sticking these in .inputrc
@@ -136,7 +136,9 @@ alias upgradeall='apt update && apt upgrade -y'
 alias diskspace="du -S | sort -n -r |more"
 alias wal="wal -e -t"
 alias uke="uke-chords"
-alias logout="mate-session-save --logout"
+#alias logout="mate-session-save --logout"
+alias mood="mplayer /home/tunnel/dotfiles/mood/0.m4a -loop 0 -volume 50" 
+alias drive="cd /media/tunnel/Finn"
 
 #alias cp='cp -i'
 #alias mv='mv -i'
