@@ -1,7 +1,7 @@
 # Install Script for all my junk
 # Made with <3 by Multipixelone
 # Set all Variables
-INSTALL_PKGS="arc-theme unzip dictd git firefox dict-gcide python3 python3-pip steam gimp filezilla audacity gparted gdebi-core vlc autoconf keepass2 automake vim sudo"
+INSTALL_PKGS="stow arc-theme unzip dictd git firefox dict-gcide python3 python3-pip steam gimp filezilla audacity gparted gdebi-core vlc autoconf keepass2 automake vim sudo"
 # HAPPY GREETING
 echo "Multipixelone Dotfiles i3wm Installer"
 echo "MAKE SURE YOU ARE RUNNING AS ROOT"
