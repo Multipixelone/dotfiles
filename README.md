@@ -1,2 +1,4 @@
 # dotfiles
-💻 Dotfiles for Linux
+My own personal 💻 dotfiles for Linux
+
+Managed with GNU Stow~
