@@ -114,6 +114,7 @@ stow bash
 stow i3
 stow pics
 stow vim
+stow code
 
 # End
 clear
