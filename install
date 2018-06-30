@@ -1,7 +1,7 @@
 # Install Script for all my junk
 # Made with <3 by Multipixelone
 # Set all Variables
-INSTALL_PKGS="terminator intltool perl lxpolkit libasound2-dev libglib2.0-dev libgtk-3-dev lxappearance gtk-chtheme qt4-qtconfig stow plymouth-themes arc-theme guake unzip dictd git firefox dict-gcide python3 python3-pip steam gimp filezilla audacity gparted gdebi-core vlc autoconf keepass2 automake vim sudo"
+INSTALL_PKGS="help2man terminator intltool perl lxpolkit libasound2-dev libglib2.0-dev libgtk-3-dev lxappearance gtk-chtheme qt4-qtconfig stow plymouth-themes arc-theme guake unzip dictd git firefox dict-gcide python3 python3-pip steam gimp filezilla audacity gparted gdebi-core vlc autoconf keepass2 automake vim sudo"
 # HAPPY GREETING
 echo "Multipixelone Dotfiles i3wm Installer"
 echo "MAKE SURE YOU ARE RUNNING AS ROOT"
@@ -55,6 +55,14 @@ snap install discord
 # Add Deepin, for the terminal!
 #sudo add-apt-repository ppa:leaeasy/dde
 #apt install -y deepin-terminal
+
+# `light` for light control
+mkdir -p ~/Github
+cd ~/Github
+git clone https://github.com/haikarainen/light.git
+cd light
+make
+sudo make install
 
 # Volumeicon for the volume control
 mkdir -p ~/Github
