@@ -37,6 +37,9 @@ for i in $INSTALL_PKGS; do
   sudo apt-get install -y $i
 done
 
+# Install setuptools
+sudo pip3 install setuptools
+
 # Install powerline for vim
 sudo pip3 install powerline-status
 
