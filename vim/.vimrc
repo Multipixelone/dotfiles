@@ -29,6 +29,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'jiangmiao/auto-pairs'
 Plug 'vim-syntastic/syntastic'
+" Plug 'Yggdroot/LeaderF'
 call plug#end()
 
 " NERDTree with simple command
