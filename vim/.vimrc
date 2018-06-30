@@ -22,8 +22,18 @@ Plug 'reedes/vim-colors-pencil'
 Plug 'Valloric/YouCompleteMe'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'altercation/vim-colors-solarized'
-" Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
+
+" NERDTree with simple command
+map <F2> :NERDTreeToggle<cr>
+" map <C-Right> :tabn<cr>
+" map <C-Left> :tabp<cr>
 
 " Limelight Configuration
 let g:limelight_conceal_ctermfg = 'gray'
