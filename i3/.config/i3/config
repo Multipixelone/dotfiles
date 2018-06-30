@@ -351,6 +351,7 @@ exec --no-startup-id google-play-music-desktop-player
 exec --no-startup-id i3-msg 'workspace 1: Default; exec firefox'
 exec --no-startup-id nm-applet
 exec --no-startup-id blueberry-tray
+exec --no-startup-id volumeicon
 #exec --no-startup-id mintupdate-launcher
 exec --no-startup-id xinput set-prop "ELAN1010:00 04F3:3012 Touchpad" "Synaptics Scrolling Distance" -80, -80
 exec --no-startup-id (wal -e -t -i ~/Documents/Backgrounds/Zelda2.jpg &) &> /dev/null
