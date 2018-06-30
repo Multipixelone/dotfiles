@@ -149,8 +149,8 @@ bindsym $mod+a focus parent
 
 # Start program shortcuts
 #bindsym $mod+a exec firefox
-bindsym $mod+g exec --no-startup-id firefox drive.google.com
-bindsym $mod+c exec --no-startup-id firefox bsd.instructure.com
+#bindsym $mod+g exec --no-startup-id firefox drive.google.com
+#bindsym $mod+c exec --no-startup-id firefox bsd.instructure.com
 #bindsym $mod+o exec --no-startup-id firefox "https://onedrive.live.com/edit.aspx?resid=BF4A7567A03738B8!8466&cid=bf4a7567a03738b8&app=OneNote&wdorigin=ondcauth2,ondcnotebooks,ondchrd"
 #bindsym Mod4+e exec --no-startup-id nautilus
 #bindsym $mod+m exec --no-startup-id firefox http://rainymood.com/
@@ -338,7 +338,7 @@ client.placeholder      $bg     $bg     $fg  $bg       $bg
 
 client.background       $bg
 
-# Start Programs (Last)
+# Start Programs on Startup (Last)
 #exec --no-startup-id i3-msg 'workspace 5: Terminal; exec mate-terminal'
 exec --no-startup-id i3-msg 'workspace 5: Terminal; exec deepin-terminal'
 #exec --no-startup-id i3-msg 'workspace 4: Coding; exec mate-terminal'
@@ -352,7 +352,8 @@ exec --no-startup-id i3-msg 'workspace 1: Default; exec firefox'
 exec --no-startup-id nm-applet
 exec --no-startup-id blueberry-tray
 exec --no-startup-id volumeicon
+exec --no-startup-id lxpolkit
 #exec --no-startup-id mintupdate-launcher
 exec --no-startup-id xinput set-prop "ELAN1010:00 04F3:3012 Touchpad" "Synaptics Scrolling Distance" -80, -80
-exec --no-startup-id (wal -e -t -i ~/Documents/Backgrounds/Zelda2.jpg &) &> /dev/null
+exec --no-startup-id wal -e -t -i ~/Documents/Backgrounds/Sunrise.jpg
 #workspace $ws1
