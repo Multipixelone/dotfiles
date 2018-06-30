@@ -53,8 +53,8 @@ cd ~/Downloads
 snap install discord
 
 # Add Deepin, for the terminal!
-sudo add-apt-repository ppa:leaeasy/dde
-apt install -y deepin-terminal
+#sudo add-apt-repository ppa:leaeasy/dde
+#apt install -y deepin-terminal
 
 # Volumeicon for the volume control
 mkdir -p ~/Github
@@ -70,6 +70,10 @@ sudo make install
 #wget "https://github.com/MarshallOfSound/Google-Play-Music-Desktop-Player-UNOFFICIAL-/releases/download/v4.5.0/google-play-music-desktop-player_4.5.0_amd64.deb" -O GPMDP.deb
 #gdebi -nq GPMDP.deb
 snap install google-play-music-desktop-player
+
+# Build st (Simple Terminal)
+cd ~/Github
+git clone git://git.suckless.org/st
 
 # Build i3-gaps
 #mkdir -p ~/Github
@@ -139,3 +143,4 @@ stow code
 # End
 clear
 echo "THANKS FOR USING MY SCRIPT <3"
+echo "Finaly, edit config.h in st to have 16pt Iosevka Font!"

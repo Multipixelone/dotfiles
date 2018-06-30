@@ -83,7 +83,7 @@ floating_modifier $mod
 
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec deepin-terminal
+bindsym $mod+Return exec st
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -367,7 +367,7 @@ bar {
 
 # Start Programs on Startup (Last)
 #exec --no-startup-id i3-msg 'workspace 5: Terminal; exec mate-terminal'
-exec --no-startup-id i3-msg 'workspace 5: Terminal; exec deepin-terminal'
+exec --no-startup-id i3-msg 'workspace 5: Terminal; exec st'
 #exec --no-startup-id i3-msg 'workspace 4: Coding; exec mate-terminal'
 exec --no-startup-id mailspring
 exec --no-startup-id discord
