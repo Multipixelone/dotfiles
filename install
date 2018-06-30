@@ -1,7 +1,7 @@
 # Install Script for all my junk
 # Made with <3 by Multipixelone
 # Set all Variables
-INSTALL_PKGS="stow arc-theme unzip dictd git firefox dict-gcide python3 python3-pip steam gimp filezilla audacity gparted gdebi-core vlc autoconf keepass2 automake vim sudo"
+INSTALL_PKGS="intltool perl lxpolkit libasound2-dev libglib2.0-dev libgtk-3-dev lxappearance gtk-chtheme qt4-qtconfig stow plymouth-themes arc-theme guake unzip dictd git firefox dict-gcide python3 python3-pip steam gimp filezilla audacity gparted gdebi-core vlc autoconf keepass2 automake vim sudo"
 # HAPPY GREETING
 echo "Multipixelone Dotfiles i3wm Installer"
 echo "MAKE SURE YOU ARE RUNNING AS ROOT"
@@ -38,10 +38,10 @@ for i in $INSTALL_PKGS; do
 done
 
 # Install powerline for vim
-pip3 install powerline-status
+sudo pip3 install powerline-status
 
 # Setup pywal
-pip3 install pywal
+sudo pip3 install pywal
 
 # Setup Downloads
 mkdir -p ~/Downloads
@@ -52,14 +52,28 @@ cd ~/Downloads
 #gdebi -nq discord.deb
 snap install discord
 
+# Add Deepin, for the terminal!
+sudo add-apt-repository ppa:leaeasy/dde
+apt install -y deepin-terminal
+
+# Volumeicon for the volume control
+mkdir -p ~/Github
+cd ~/Github
+git clone https://github.com/Maato/volumeicon.git
+cd volumeicon
+./autogen.sh
+./configure --prefix=/usr
+make
+sudo make install
+
 # Install GPMDP
 #wget "https://github.com/MarshallOfSound/Google-Play-Music-Desktop-Player-UNOFFICIAL-/releases/download/v4.5.0/google-play-music-desktop-player_4.5.0_amd64.deb" -O GPMDP.deb
 #gdebi -nq GPMDP.deb
 snap install google-play-music-desktop-player
 
 # Build i3-gaps
-mkdir -p ~/Github
-cd ~/Github
+#mkdir -p ~/Github
+#cd ~/Github
 git clone https://github.com/Airblader/i3.git i3-gaps
 apt-get install --yes libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm0 libxcb-xrm-dev automake
 cd i3-gaps
@@ -72,6 +86,12 @@ sudo make install
 
 # Install Papirus Icons
 wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-icon-theme/master/install.sh | sh
+
+# Plymouth Splash Screen
+#cd ~/Downloads
+#wget https://www.gnome-look.org/p/1230104/startdownload?file_id=1524224542&file_name=mint.zip&file_type=application/zip&file_size=113539&url=https%3A%2F%2Fdl.opendesktop.org%2Fapi%2Ffiles%2Fdownloadfile%2Fid%2F1524224542%2Fs%2Fa9f60a493c0f526e90613a0e906293ad%2Ft%2F1530170681%2Fu%2F%2Fmint.zip
+#sudo update-alternatives --config default.plymouth
+#udo update-initramfs -u
 
 # Install Mailspring :)
 snap install Mailspring
@@ -94,7 +114,7 @@ rm -rv overpass overpass-mono
 #sudo apt-get install apt-transport-https
 #echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 #apt update && apt install sublime-text
-snap install sublime-text
+#snap install sublime-text
 
 # Iosevka Font
 cd ~/dotfiles
