@@ -142,6 +142,15 @@ fc-cache -f -v
 cd ~/dotfiles
 rm -rv ttf/ ttf-unhinted/ woff/ woff2/
 
+# WineHQ
+cd ~/dotfiles
+sudo dpkg --add-architecture i386 
+wget -nc https://dl.winehq.org/wine-builds/Release.key
+sudo apt-key add Release.key
+sudo apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main'
+sudo apt-get update
+sudo apt-get install --install-recommends winehq-staging
+
 # Stow
 cd ~/dotfiles
 mv ~/.bashrc ~/.bashrcold
