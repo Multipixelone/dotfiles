@@ -46,6 +46,9 @@ sudo pip3 install powerline-status
 # Setup pywal
 sudo pip3 install pywal
 
+# Setup Steam Wal
+sudo pip3 install wal-steam
+
 # Setup Downloads
 mkdir -p ~/Downloads
 cd ~/Downloads
