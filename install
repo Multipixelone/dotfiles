@@ -1,7 +1,7 @@
 # Install Script for all my junk
 # Made with <3 by Multipixelone
 # Set all Variables
-INSTALL_PKGS="intltool perl lxpolkit libasound2-dev libglib2.0-dev libgtk-3-dev lxappearance gtk-chtheme qt4-qtconfig stow plymouth-themes arc-theme guake unzip dictd git firefox dict-gcide python3 python3-pip steam gimp filezilla audacity gparted gdebi-core vlc autoconf keepass2 automake vim sudo"
+INSTALL_PKGS="terminator intltool perl lxpolkit libasound2-dev libglib2.0-dev libgtk-3-dev lxappearance gtk-chtheme qt4-qtconfig stow plymouth-themes arc-theme guake unzip dictd git firefox dict-gcide python3 python3-pip steam gimp filezilla audacity gparted gdebi-core vlc autoconf keepass2 automake vim sudo"
 # HAPPY GREETING
 echo "Multipixelone Dotfiles i3wm Installer"
 echo "MAKE SURE YOU ARE RUNNING AS ROOT"
@@ -72,8 +72,11 @@ sudo make install
 snap install google-play-music-desktop-player
 
 # Build st (Simple Terminal)
-cd ~/Github
-git clone git://git.suckless.org/st
+#cd ~/Github
+#git clone git://git.suckless.org/st
+#cd ~/Github/st
+#wget https://st.suckless.org/patches/clipboard/st-clipboard-20180309-c5ba9c0.diff 
+#git apply st-clipboard-20180309-c5ba9c0.diff
 
 # Build i3-gaps
 #mkdir -p ~/Github
@@ -139,6 +142,7 @@ stow i3
 stow pics
 stow vim
 stow code
+stow terminator
 
 # End
 clear
