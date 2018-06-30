@@ -3,6 +3,17 @@ set rtp+=/usr/local/lib/python3.6/dist-packages/powerline/bindings/vim/
 " Always show statusline
 set laststatus=2
 
+" Plug Stuff
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin()
+Plug 'junegunn/goyo.vim'
+call plug#end()
+
 " Use 256 colours (Use this setting only if your terminal supports 256 colours)
 set t_Co=256
 
