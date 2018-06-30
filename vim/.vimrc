@@ -13,19 +13,55 @@ endif
 call plug#begin()
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
+Plug 'sjl/badwolf'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tomtom/tcomment_vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'reedes/vim-colors-pencil'
+Plug 'Valloric/YouCompleteMe'
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'altercation/vim-colors-solarized'
+" Plug 'tpope/vim-fugitive'
 call plug#end()
 
 " Limelight Configuration
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
+" autocmd! User GoyoEnter Limelight
+" autocmd! User GoyoLeave Limelight!
+
+" Define Markdown Function
+function MarkdownGoyo()
+    Goyo
+    colorscheme pencil
+endfunction
+
+" Goyo if Markdown
+" autocmd FileType markdown call MarkdownGoyo()
+" #autocmd FileType markdown colorscheme pencil
+
+" Set color scheme
+" colorscheme solarized
+function! s:goyo_enter()
+    Limelight
+    colorscheme pencil
+endfunction
+
+function! s:goyo_leave()
+    colorscheme solarized
+    Limelight!
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 " Turn on Numbers~
 set number
 
 " Use 256 colours (Use this setting only if your terminal supports 256 colours)
 set t_Co=256
+" colorscheme solarized
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maintainer: 
@@ -425,3 +461,5 @@ function! VisualSelection(direction, extra_filter) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
+
+colorscheme solarized
