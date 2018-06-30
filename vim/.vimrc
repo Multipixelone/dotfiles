@@ -12,7 +12,14 @@ endif
 
 call plug#begin()
 Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 call plug#end()
+
+" Limelight Configuration
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
 " Use 256 colours (Use this setting only if your terminal supports 256 colours)
 set t_Co=256
