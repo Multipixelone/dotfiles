@@ -1,7 +1,7 @@
 # Install Script for all my junk
 # Made with <3 by Multipixelone
 # Set all Variables
-INSTALL_PKGS="ilibjpeg-turbo8-dev libpam0g-dev libxcb-composite0 libxcb-composite0-dev libxcb-image0-dev libxcb-randr0 libxcb-util-dev libxcb-xinerama0 libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-x11-dev feh libev-dev bc zsh i3blocks i3lock i3lock-fancy i3status cmake grip surf help2man terminator intltool perl lxpolkit libasound2-dev libglib2.0-dev libgtk-3-dev lxappearance gtk-chtheme qt4-qtconfig stow plymouth-themes arc-theme guake unzip dictd git firefox dict-gcide python3 python3-pip steam gimp filezilla audacity gparted gdebi-core vlc autoconf keepass2 automake vim sudo"
+INSTALL_PKGS="xcb-proto libjpeg-turbo8-dev libpam0g-dev libxcb-composite0 libxcb-composite0-dev libxcb-image0-dev libxcb-randr0 libxcb-util-dev libxcb-xinerama0 libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-x11-dev feh libev-dev bc zsh i3blocks i3lock i3lock-fancy i3status cmake grip surf help2man terminator intltool perl lxpolkit libasound2-dev libglib2.0-dev libgtk-3-dev lxappearance gtk-chtheme qt4-qtconfig stow plymouth-themes arc-theme guake unzip dictd git firefox dict-gcide python3 python3-pip steam gimp filezilla audacity gparted gdebi-core vlc autoconf keepass2 automake vim sudo"
 # HAPPY GREETING
 echo "Multipixelone Dotfiles i3wm Installer"
 echo "MAKE SURE YOU ARE RUNNING AS ROOT"
@@ -36,6 +36,8 @@ apt-get --yes update && apt-get --yes upgrade
 for i in $INSTALL_PKGS; do
   sudo apt-get install -y $i
 done
+
+exit 0
 
 # Install setuptools
 sudo pip3 install setuptools
@@ -170,6 +172,10 @@ wget https://raw.githubusercontent.com/UtkarshVerma/installer-scripts/master/bet
 chmod +x betterlockscreen.sh
 ./betterlockscreen.sh
 betterlockscreen -u ~/Documents/Backgrounds/Sunrise.jpg
+
+# Polybar
+cd ~/Github
+
 
 # WineHQ
 cd ~/dotfiles
