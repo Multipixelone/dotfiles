@@ -176,10 +176,27 @@ alias uke='uke-chords'
 alias mood='mplayer /home/tunnel/dotfiles/mood/0.m4a -loop 0 -volume 50'
 alias home='cd ~/'
 alias dot='cd ~/dotfiles'
+alias gs='git status'
 # alias drive='cd /media/tunnel/Finn'
 
 drive () {
     cd /media/tunnel/Finn/"$1"
+}
+
+school () {
+    cd /media/tunnel/Finn/School/Southridge/9th\ Grade/"$1"
+}
+
+mdpdf () {
+    pandoc "$1" -o "$1".pdf
+    transfer "$1".pdf
+    rm "$1".pdf
+}
+
+mdprev () {
+    pandoc "$1" -o tmp.html
+    surf tmp.html
+    rm tmp.html
 }
 
 # ls aliases
