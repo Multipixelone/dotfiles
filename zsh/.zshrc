@@ -63,6 +63,8 @@ COMPLETION_WAITING_DOTS="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  autojump
+  history
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -172,7 +174,12 @@ alias diskspace='du -S | sort -n -r |more'
 alias wal='wal -e -t'
 alias uke='uke-chords'
 alias mood='mplayer /home/tunnel/dotfiles/mood/0.m4a -loop 0 -volume 50'
-alias drive='cd /media/tunnel/Finn'
+alias home='cd ~/'
+# alias drive='cd /media/tunnel/Finn'
+
+drive () {
+    cd /media/tunnel/Finn/"$1"
+}
 
 # ls aliases
 alias la='ls -Alh'
