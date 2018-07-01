@@ -32,6 +32,7 @@ Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-markdown'
 Plug 'yggdroot/indentline'
 Plug 'junegunn/seoul256.vim'
+Plug 'amix/vim-zenroom2'
 " Plug 'Yggdroot/LeaderF'
 call plug#end()
 
@@ -46,15 +47,7 @@ let g:limelight_conceal_ctermfg = 240
 " autocmd! User GoyoEnter Limelight
 " autocmd! User GoyoLeave Limelight!
 
-" Define Markdown Function
-" function MarkdownGoyo()
-    " Goyo
-    " colorscheme pencil
-" endfunction
 
-" Goyo if Markdown
-" autocmd FileType markdown call MarkdownGoyo()
-" #autocmd FileType markdown colorscheme pencil
 
 " IndentLine
 let g:indentLine_char = '▏'
@@ -75,6 +68,17 @@ endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+" Define Markdown Function
+function MarkdownGoyo()
+    Goyo
+    " call <SID>goyo_enter()
+    colo seoul256
+endfunction
+
+" Goyo if Markdown
+autocmd FileType markdown call MarkdownGoyo()
+" #autocmd FileType markdown colorscheme pencil
 
 " Turn on Numbers~
 set number
@@ -485,12 +489,12 @@ endfunction
 colorscheme solarized
 
 " Define Markdown Function
-function! MarkGoyo()
-    Goyo
-    call <SID>goyo_enter()
-    colorscheme pencil
-endfunction
+" function! MarkGoyo()
+    " Goyo
+    " call <SID>goyo_enter()
+    " colorscheme pencil
+" endfunction
 
 " Goyo if Markdown
-autocmd FileType markdown Goyo 
+" autocmd FileType markdown Goyo 
 " MarkGoyo()
