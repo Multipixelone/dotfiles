@@ -193,10 +193,12 @@ alias 666='chmod -R 666'
 alias 755='chmod -R 755'
 alias 777='chmod -R 777'
 
-# Apt'ing
+# Package Managers
 alias apt='sudo apt'
 alias apt-get='sudo apt'
 alias aptitude='sudo aptitude'
+alias pacman='sudo pacman'
+alias yaourt='sudo yaourt'
 
 # Extract Function
 extract () {
