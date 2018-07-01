@@ -174,8 +174,9 @@ chmod +x betterlockscreen.sh
 betterlockscreen -u ~/Documents/Backgrounds/Sunrise.jpg
 
 # Polybar
-cd ~/Github
-
+# cd ~/Github
+add-apt-repository "deb http://archive.getdeb.net/ubuntu xenial-getdeb apps"
+wget -q -O- http://archive.getdeb.net/getdeb-archive.key | sudo apt-key add - 
 
 # WineHQ
 cd ~/dotfiles
