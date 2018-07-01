@@ -1,0 +1,217 @@
+# Install Script for all my junk
+# Made with <3 by Multipixelone
+# Set all Variables
+INSTALL_PKGS="zsh i3blocks i3lock i3-gaps i3lock-fancy i3status terminator lxsession lxappearance gtk-chtheme stow arc-gtk-theme unzip dictd git firefox python3 python-pip steam gimp filezilla audacity gparted cmake vlc autoconf keepass automake vim sudo"
+# HAPPY GREETING
+echo "Multipixelone Dotfiles i3wm Installer (For Arch)"
+echo "MAKE SURE YOU ARE RUNNING AS ROOT"
+sleep 2s
+
+# Gotta have Root
+#if (( $EUID != 0 )); then
+#    echo "Please run as root"
+#    exit
+#fi
+
+# Display install message
+[ -r /etc/lsb-release ] && . /etc/lsb-release
+
+if [ -z "$DISTRIB_DESCRIPTION" ] && [ -x /usr/bin/lsb_release ]; then
+        # Fall back to using the very slow lsb_release utility
+        DISTRIB_DESCRIPTION=$(lsb_release -s -d)
+fi
+
+echo
+printf "Installing on: %s (%s %s %s)\n" "$DISTRIB_DESCRIPTION" "$(uname -o)" "$(uname -r)" "$(uname -m)"
+sleep 2s
+
+# Check for package managers
+command -v pacman >/dev/null 2>&1 || { echo >&2 "pacman isn't installed. Aborting"; exit 1; }
+command -v snap >/dev/null 2>&1 || { yaourt -S snapd; }
+
+# Install all updates first
+pacman -Syu
+
+# Install All Applications
+for i in $INSTALL_PKGS; do
+  sudo pacman -S --noconfirm $i
+done
+
+exit 0
+
+# Install setuptools
+sudo pip3 install setuptools
+
+# Install powerline for vim
+sudo pip3 install powerline-status
+
+# Setup pywal
+sudo pip3 install pywal
+
+# Setup Steam Wal
+sudo pip3 install wal-steam
+
+# YouCompleteMe
+# cd ~/.vim/plugged/YouCompleteMe
+# ./install.py --clang-completer
+
+# Setup Downloads
+mkdir -p ~/Downloads
+cd ~/Downloads
+
+# Install Discord
+#wget "https://dl.discordapp.net/apps/linux/0.0.5/discord-0.0.5.deb" -O discord.deb
+#gdebi -nq discord.deb
+snap install discord
+
+# Add Deepin, for the terminal!
+#sudo add-apt-repository ppa:leaeasy/dde
+#apt install -y deepin-terminal
+
+# Oh-My-Zsh!
+sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+
+# `light` for light control
+#mkdir -p ~/Github
+#cd ~/Github
+#git clone https://github.com/haikarainen/light.git
+#cd light
+#make
+#sudo make install
+yaourt -S light-git
+
+# Volumeicon for the volume control
+#mkdir -p ~/Github
+#cd ~/Github
+#git clone https://github.com/Maato/volumeicon.git
+#cd volumeicon
+#./autogen.sh
+#./configure --prefix=/usr
+#make
+#sudo make install
+yaourt -S volumeicon-git
+
+# Install GPMDP
+#wget "https://github.com/MarshallOfSound/Google-Play-Music-Desktop-Player-UNOFFICIAL-/releases/download/v4.5.0/google-play-music-desktop-player_4.5.0_amd64.deb" -O GPMDP.deb
+#gdebi -nq GPMDP.deb
+snap install google-play-music-desktop-player
+
+# Build st (Simple Terminal)
+#cd ~/Github
+#git clone git://git.suckless.org/st
+#cd ~/Github/st
+#wget https://st.suckless.org/patches/clipboard/st-clipboard-20180309-c5ba9c0.diff 
+#git apply st-clipboard-20180309-c5ba9c0.diff
+
+# Build i3-gaps
+#mkdir -p ~/Github
+#cd ~/Github
+#git clone https://github.com/Airblader/i3.git i3-gaps
+#apt-get install --yes libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm0 libxcb-xrm-dev automake
+#cd i3-gaps
+#autoreconf --force --install
+#rm -rf build/
+#mkdir -p build && cd build/
+#../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
+#make
+#sudo make install
+# https://typora.io/linux/Typora-linux-x64.tar.gz
+# Building i3lock-color
+
+
+# Install Papirus Icons
+wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-icon-theme/master/install.sh | sh
+
+# Plymouth Splash Screen
+#cd ~/Downloads
+#wget https://www.gnome-look.org/p/1230104/startdownload?file_id=1524224542&file_name=mint.zip&file_type=application/zip&file_size=113539&url=https%3A%2F%2Fdl.opendesktop.org%2Fapi%2Ffiles%2Fdownloadfile%2Fid%2F1524224542%2Fs%2Fa9f60a493c0f526e90613a0e906293ad%2Ft%2F1530170681%2Fu%2F%2Fmint.zip
+#sudo update-alternatives --config default.plymouth
+#udo update-initramfs -u
+
+# Install Mailspring :)
+snap install Mailspring
+
+# Overpass Font
+cd ~/dotfiles
+wget https://github.com/RedHatBrand/Overpass/releases/download/3.0.2/overpass-desktop-fonts.zip
+unzip overpass-desktop-fonts.zip
+rm overpass-desktop-fonts.zip
+cd overpass
+mv * /usr/share/fonts/
+cd ../overpass-mono
+mv * /usr/share/fonts
+fc-cache -f -v
+cd ~/dotfiles
+rm -rv overpass overpass-mono
+
+# Sublime
+#wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+#sudo apt-get install apt-transport-https
+#echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+#apt update && apt install sublime-text
+#snap install sublime-text
+
+# Iosevka Font
+cd ~/dotfiles
+wget https://github.com/be5invis/Iosevka/releases/download/v1.14.3/02-iosevka-term-1.14.3.zip -O iosevka.zip
+unzip iosevka.zip
+rm iosevka.zip
+cd ttf/
+mv * /usr/share/fonts/
+fc-cache -f -v
+cd ~/dotfiles
+rm -rv ttf/ ttf-unhinted/ woff/ woff2/
+
+# BetterLockScreen
+#cd ~/Github
+#git clone https://github.com/PandorasFox/i3lock-color.git
+#cd i3lock-color
+#autoreconf -i && ./configure && make
+#sudo make install
+#cd ~/dotfiles
+#wget https://raw.githubusercontent.com/pavanjadhaw/betterlockscreen/master/betterlockscreen
+#wget https://raw.githubusercontent.com/UtkarshVerma/installer-scripts/master/betterlockscreen.sh
+#chmod +x betterlockscreen.sh
+#./betterlockscreen.sh
+yaourt -S i3lock-color-git
+yaourt -S betterlockscreen
+betterlockscreen -u ~/Documents/Backgrounds/Sunrise.jpg
+
+# Polybar
+#cd ~/Github
+
+
+# WineHQ
+#cd ~/dotfiles
+#sudo dpkg --add-architecture i386 
+#wget -nc https://dl.winehq.org/wine-builds/Release.key
+#sudo apt-key add Release.key
+#sudo apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main'
+#sudo apt-get update
+#sudo apt-get install --install-recommends winehq-staging
+pacman -S wine
+
+# Typora
+#sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE
+#sudo add-apt-repository 'deb https://typora.io/linux ./'
+#sudo apt-get update
+#sudo apt-get install -y typora
+mkdir -p ~/Downloads
+cd ~/Downloads
+wget https://typora.io/linux/Typora-linux-x64.tar.gz
+
+# Stow
+cd ~/dotfiles
+mv ~/.zshrc ~/.zshrcold
+#stow bash
+stow  zsh
+stow i3
+stow pics
+stow vim
+stow code
+stow terminator
+
+# End
+clear
+echo "THANKS FOR USING MY SCRIPT <3"
+# echo "Finaly, edit config.h in st to have 16pt Iosevka Font!"
