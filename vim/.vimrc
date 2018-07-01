@@ -30,6 +30,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'jiangmiao/auto-pairs'
 Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-markdown'
+Plug 'yggdroot/indentline'
+Plug 'junegunn/seoul256.vim'
 " Plug 'Yggdroot/LeaderF'
 call plug#end()
 
@@ -45,20 +47,25 @@ let g:limelight_conceal_ctermfg = 240
 " autocmd! User GoyoLeave Limelight!
 
 " Define Markdown Function
-function MarkdownGoyo()
-    Goyo
-    colorscheme pencil
-endfunction
+" function MarkdownGoyo()
+    " Goyo
+    " colorscheme pencil
+" endfunction
 
 " Goyo if Markdown
 " autocmd FileType markdown call MarkdownGoyo()
 " #autocmd FileType markdown colorscheme pencil
 
+" IndentLine
+let g:indentLine_char = '▏'
+
 " Set color scheme
 " colorscheme solarized
 function! s:goyo_enter()
     Limelight
-    colorscheme pencil
+    " colorscheme pencil
+    colo seoul256
+    set background=dark
 endfunction
 
 function! s:goyo_leave()
@@ -476,3 +483,14 @@ function! VisualSelection(direction, extra_filter) range
 endfunction
 
 colorscheme solarized
+
+" Define Markdown Function
+function! MarkGoyo()
+    Goyo
+    call <SID>goyo_enter()
+    colorscheme pencil
+endfunction
+
+" Goyo if Markdown
+autocmd FileType markdown Goyo 
+" MarkGoyo()
