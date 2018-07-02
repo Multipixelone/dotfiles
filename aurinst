@@ -1,7 +1,7 @@
 # Install Script for all my junk
 # Made with <3 by Multipixelone
 # Set all Variables
-INSTALL_PKGS="zsh i3blocks i3lock i3-gaps i3lock-fancy i3status terminator lxsession lxappearance gtk-chtheme stow arc-gtk-theme unzip dictd git firefox python3 python-pip steam gimp filezilla audacity gparted cmake vlc autoconf keepass automake vim sudo"
+INSTALL_PKGS="gdm zsh i3blocks i3lock i3-gaps i3lock-fancy i3status terminator lxsession lxappearance gtk-chtheme stow arc-gtk-theme unzip dictd git firefox python3 python-pip steam gimp filezilla audacity gparted cmake vlc autoconf keepass automake vim sudo"
 # HAPPY GREETING
 echo "Multipixelone Dotfiles i3wm Installer (For Arch)"
 echo "MAKE SURE YOU ARE RUNNING AS ROOT"
