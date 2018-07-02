@@ -151,8 +151,8 @@ bindsym $mod+a focus parent
 
 # Start program shortcuts
 # bindsym $mod+a exec firefox
-# bindsym $mod+g exec --no-startup-id firefox drive.google.com
-# bindsym $mod+c exec --no-startup-id firefox bsd.instructure.com
+bindsym $mod+g exec --no-startup-id firefox drive.google.com
+bindsym $mod+c exec --no-startup-id firefox bsd.instructure.com
 #bindsym $mod+o exec --no-startup-id firefox "https://onedrive.live.com/edit.aspx?resid=BF4A7567A03738B8!8466&cid=bf4a7567a03738b8&app=OneNote&wdorigin=ondcauth2,ondcnotebooks,ondchrd"
 #bindsym Mod4+e exec --no-startup-id nautilus
 #bindsym $mod+m exec --no-startup-id firefox http://rainymood.com/
@@ -160,11 +160,11 @@ bindsym $mod+m exec --no-startup-id gnome-terminal -- mplayer /home/tunnel/dotfi
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1: Default"
-set $ws2 "2: Email"
+set $ws1 "1: Research"
+set $ws2 "2: Markdown"
 set $ws3 "3: Music"
-set $ws4 "4: Coding"
-set $ws5 "5: Terminal"
+set $ws4 "4: Terminal"
+set $ws5 "5: Email"
 set $ws6 "6: Discord"
 set $ws7 "7: KeePass2"
 set $ws8 "8: Games"
@@ -185,7 +185,7 @@ assign [class="MultiMC5"] $ws8
 assign [class="VirtualBox Manager"] $ws10
 assign [class="VirtualBox Machine"] $ws8
 assign [class="Thunderbird"] $ws2
-assign [class="Atril"] $ws2
+assign [class"Atril"] $ws2
 
 # Open apps as floating (stolen from Manjaro)
 # Open specific applications in floating mode
