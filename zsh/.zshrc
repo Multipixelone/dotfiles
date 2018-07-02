@@ -199,6 +199,12 @@ mdprev () {
     rm tmp.html
 }
 
+mdprevpdf () {
+    pandoc "$1" -o tmp.pdf
+    atril tmp.pdf
+    rm tmp.pdf
+}
+
 # ls aliases
 alias la='ls -Alh'
 alias ls='ls --color=always'

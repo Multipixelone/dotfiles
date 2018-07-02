@@ -29,7 +29,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'jiangmiao/auto-pairs'
 Plug 'vim-syntastic/syntastic'
-Plug 'tpope/vim-markdown'
+" Plug 'tpope/vim-markdown'
 Plug 'yggdroot/indentline'
 Plug 'junegunn/seoul256.vim'
 Plug 'amix/vim-zenroom2'
@@ -47,7 +47,11 @@ let g:limelight_conceal_ctermfg = 240
 " autocmd! User GoyoEnter Limelight
 " autocmd! User GoyoLeave Limelight!
 
+" Set Shell
+" :set shell=zsh\ -l
 
+" Preview markdown file
+" map F3 ! mdprevpdf %
 
 " IndentLine
 let g:indentLine_char = '▏'
@@ -72,7 +76,7 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " Define Markdown Function
 function MarkdownGoyo()
     Goyo
-    " call <SID>goyo_enter()
+    call <SID>goyo_enter()
     colo seoul256
 endfunction
 
