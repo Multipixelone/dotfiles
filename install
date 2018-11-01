@@ -1,10 +1,10 @@
 # Install Script for all my junk
 # Made with <3 by Multipixelone
 # Set all Variables
-INSTALL_PKGS="atril texlive lmodern pandoc xcb-proto libjpeg-turbo8-dev libpam0g-dev libxcb-composite0 libxcb-composite0-dev libxcb-image0-dev libxcb-randr0 libxcb-util-dev libxcb-xinerama0 libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-x11-dev feh libev-dev bc zsh i3blocks i3lock i3lock-fancy i3status cmake grip surf help2man terminator intltool perl lxpolkit libasound2-dev libglib2.0-dev libgtk-3-dev lxappearance gtk-chtheme qt4-qtconfig stow plymouth-themes arc-theme guake unzip dictd git firefox dict-gcide python3 python3-pip steam gimp filezilla audacity gparted gdebi-core vlc autoconf keepass2 automake vim sudo"
+INSTALL_PKGS="atril xcb-proto libjpeg-turbo8-dev libpam0g-dev libxcb-composite0 libxcb-composite0-dev libxcb-image0-dev libxcb-randr0 libxcb-util-dev libxcb-xinerama0 libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-x11-dev feh libev-dev bc zsh i3blocks i3lock i3lock-fancy i3status cmake grip surf help2man terminator intltool perl lxpolkit libasound2-dev libglib2.0-dev libgtk-3-dev lxappearance gtk-chtheme qt4-qtconfig stow unzip dictd git firefox dict-gcide python3 python3-pip filezilla gparted gdebi-core vlc autoconf automake vim sudo"
 # HAPPY GREETING
 echo "Multipixelone Dotfiles i3wm Installer"
-echo "MAKE SURE YOU ARE RUNNING AS ROOT"
+echo "MAKE SURE YOU ARE NOTTT RUNNING AS ROOT"
 sleep 2s
 
 # Gotta have Root
@@ -52,7 +52,7 @@ pip3 install powerline-status
 sudo pip3 install pywal
 
 # Setup Steam Wal
-sudo pip3 install wal-steam
+#sudo pip3 install wal-steam
 
 # YouCompleteMe
 # cd ~/.vim/plugged/YouCompleteMe
@@ -209,4 +209,4 @@ stow terminator
 # End
 clear
 echo "THANKS FOR USING MY SCRIPT <3"
-echo "Finaly, edit config.h in st to have 16pt Iosevka Font!"
+echo "Make sure to "
