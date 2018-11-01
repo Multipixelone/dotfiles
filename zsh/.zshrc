@@ -103,13 +103,13 @@ source $ZSH/oh-my-zsh.sh
 # Transfer.sh Alias
 # Authors:
 #   Remco Verhoef <remco@dutchcoders.io>
-
-curl --version 2>&1 > /dev/null
-if [ $? -ne 0 ]; then
-  echo "Could not find curl."
-  return 1
-fi
-
+#
+#curl --version 2>&1 > /dev/null
+#if [ $? -ne 0 ]; then
+#  echo "Could not find curl."
+#  return 1
+#fi
+#
 #transfer() {
 #    # check arguments
 #    if [ $# -eq 0 ];
