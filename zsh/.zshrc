@@ -161,8 +161,8 @@ source $ZSH/oh-my-zsh.sh
 # Set default editor
 export EDITOR=vim
 export VISUAL=vim
-alias pico='edit'
-alias nano='edit'
+#alias pico='edit'
+#alias nano='edit'
 
 # Modified commands
 alias d='dict'
