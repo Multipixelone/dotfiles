@@ -167,8 +167,8 @@ export VISUAL=vim
 # Modified commands
 alias d='dict'
 alias c='clear'
-alias night='night-mode'
-alias day='day-mode'
+#alias night='night-mode'
+#alias day='day-mode'
 alias please='sudo $(fc -ln -1)'
 alias red='redshift -l 45.523062:-122.676482'
 alias upgradeall='apt update && apt upgrade -y'
