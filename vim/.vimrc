@@ -44,8 +44,8 @@ map <F2> :NERDTreeToggle<cr>
 " Limelight Configuration
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
-" autocmd! User GoyoEnter Limelight
-" autocmd! User GoyoLeave Limelight!
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
 " Set Shell
 " :set shell=zsh\ -l
@@ -58,30 +58,30 @@ let g:indentLine_char = '▏'
 
 " Set color scheme
 " colorscheme solarized
-function! s:goyo_enter()
-    Limelight
-    " colorscheme pencil
-    colo seoul256
-    set background=dark
-endfunction
+"function! s:goyo_enter()
+"    Limelight
+"    " colorscheme pencil"
+"    colo seoul256
+"    set background=dark
+"endfunction
 
-function! s:goyo_leave()
-    colorscheme solarized
-    Limelight!
-endfunction
+"function! s:goyo_leave()
+""    colorscheme solarized
+""    Limelight!
+"endfunction
 
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
+"autocmd! User GoyoEnter nested call <SID>goyo_enter()
+"autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 " Define Markdown Function
-function MarkdownGoyo()
-    Goyo
-    call <SID>goyo_enter()
-    colo seoul256
-endfunction
+"function MarkdownGoyo()
+"    Goyo
+"    call <SID>goyo_enter()
+"    colo seoul256
+"endfunction
 
 " Goyo if Markdown
-autocmd FileType markdown call MarkdownGoyo()
+autocmd FileType markdown call goyo
 " #autocmd FileType markdown colorscheme pencil
 
 " Turn on Numbers~
