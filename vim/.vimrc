@@ -89,7 +89,7 @@ set number
 
 " Use 256 colours (Use this setting only if your terminal supports 256 colours)
 set t_Co=256
-" colorscheme solarized
+colorscheme solarized
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maintainer:
@@ -489,8 +489,6 @@ function! VisualSelection(direction, extra_filter) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
-
-colorscheme solarized
 
 " Define Markdown Function
 " function! MarkGoyo()
