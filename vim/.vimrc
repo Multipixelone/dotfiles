@@ -44,8 +44,20 @@ map <F2> :NERDTreeToggle<cr>
 " Limelight Configuration
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
+
+" Limelight upon Goyo
+function! s:goyo_enter()
+  Limelight
+  " ...
+endfunction
+
+function! s:goyo_leave()
+  Limelight!
+  " ...
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 " Set Shell
 " :set shell=zsh\ -l
