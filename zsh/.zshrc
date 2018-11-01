@@ -177,7 +177,7 @@ alias wal='wal -e -t'
 alias uke='uke-chords'
 alias mood='mplayer /home/tunnel/dotfiles/mood/0.m4a -loop 0 -volume 50'
 alias home='cd ~/'
-alias dot='cd ~/dotfiles'
+alias dot='cd ~/Github/dotfiles'
 alias gs='git status'
 # alias drive='cd /media/tunnel/Finn'
 
