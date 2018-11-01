@@ -65,6 +65,8 @@ plugins=(
   git
   autojump
   history
+  sudo
+  sprunge
 )
 
 source $ZSH/oh-my-zsh.sh
