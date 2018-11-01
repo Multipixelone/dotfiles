@@ -27,10 +27,10 @@ sleep 2s
 
 # Check for package managers
 command -v apt-get >/dev/null 2>&1 || { echo >&2 "apt-get isn't installed. Aborting"; exit 1; }
-command -v snap >/dev/null 2>&1 || { apt install snapd; }
+command -v snap >/dev/null 2>&1 || { sudo apt install snapd; }
 
 # Install all updates first
-apt-get --yes update && apt-get --yes upgrade
+sudo apt-get --yes update && apt-get --yes upgrade
 
 # Install All Applications
 for i in $INSTALL_PKGS; do
@@ -40,10 +40,13 @@ done
 exit 0
 
 # Install setuptools
-sudo pip3 install setuptools
+pip3 install setuptools
+
+# Install wheel
+pip3 install wheel
 
 # Install powerline for vim
-sudo pip3 install powerline-status
+pip3 install powerline-status
 
 # Setup pywal
 sudo pip3 install pywal
@@ -62,14 +65,13 @@ cd ~/Downloads
 # Install Discord
 #wget "https://dl.discordapp.net/apps/linux/0.0.5/discord-0.0.5.deb" -O discord.deb
 #gdebi -nq discord.deb
-snap install discord
+sudo snap install discord
 
 # Add Deepin, for the terminal!
 #sudo add-apt-repository ppa:leaeasy/dde
 #apt install -y deepin-terminal
 
 # Oh-My-Zsh!
-sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
 # `light` for light control
 mkdir -p ~/Github
@@ -98,14 +100,14 @@ snap install google-play-music-desktop-player
 #cd ~/Github
 #git clone git://git.suckless.org/st
 #cd ~/Github/st
-#wget https://st.suckless.org/patches/clipboard/st-clipboard-20180309-c5ba9c0.diff 
+#wget https://st.suckless.org/patches/clipboard/st-clipboard-20180309-c5ba9c0.diff
 #git apply st-clipboard-20180309-c5ba9c0.diff
 
 # Build i3-gaps
 #mkdir -p ~/Github
 cd ~/Github
 git clone https://github.com/Airblader/i3.git i3-gaps
-apt-get install --yes libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm0 libxcb-xrm-dev automake
+sudo apt-get install --yes libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm0 libxcb-xrm-dev automake
 cd i3-gaps
 autoreconf --force --install
 rm -rf build/
@@ -113,9 +115,6 @@ mkdir -p build && cd build/
 ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
 make
 sudo make install
-
-# Building i3lock-color
-
 
 # Install Papirus Icons
 wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-icon-theme/master/install.sh | sh
@@ -127,10 +126,10 @@ wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-icon-
 #udo update-initramfs -u
 
 # Install Mailspring :)
-snap install Mailspring
+#snap install Mailspring
 
 # Overpass Font
-cd ~/dotfiles
+cd ~/Github/dotfiles
 wget https://github.com/RedHatBrand/Overpass/releases/download/3.0.2/overpass-desktop-fonts.zip
 unzip overpass-desktop-fonts.zip
 rm overpass-desktop-fonts.zip
@@ -139,7 +138,7 @@ mv * /usr/share/fonts/
 cd ../overpass-mono
 mv * /usr/share/fonts
 fc-cache -f -v
-cd ~/dotfiles
+cd ~/Github/dotfiles
 rm -rv overpass overpass-mono
 
 # Sublime
@@ -150,14 +149,14 @@ rm -rv overpass overpass-mono
 #snap install sublime-text
 
 # Iosevka Font
-cd ~/dotfiles
+cd ~/Github/dotfiles
 wget https://github.com/be5invis/Iosevka/releases/download/v1.14.3/02-iosevka-term-1.14.3.zip -O iosevka.zip
 unzip iosevka.zip
 rm iosevka.zip
 cd ttf/
 mv * /usr/share/fonts/
 fc-cache -f -v
-cd ~/dotfiles
+cd ~/Github/dotfiles
 rm -rv ttf/ ttf-unhinted/ woff/ woff2/
 
 # BetterLockScreen
@@ -166,7 +165,7 @@ git clone https://github.com/PandorasFox/i3lock-color.git
 cd i3lock-color
 autoreconf -i && ./configure && make
 sudo make install
-cd ~/dotfiles
+cd ~/Github/dotfiles
 #wget https://raw.githubusercontent.com/pavanjadhaw/betterlockscreen/master/betterlockscreen
 wget https://raw.githubusercontent.com/UtkarshVerma/installer-scripts/master/betterlockscreen.sh
 chmod +x betterlockscreen.sh
@@ -175,12 +174,12 @@ betterlockscreen -u ~/Documents/Backgrounds/Sunrise.jpg
 
 # Polybar
 # cd ~/Github
-add-apt-repository "deb http://archive.getdeb.net/ubuntu xenial-getdeb apps"
-wget -q -O- http://archive.getdeb.net/getdeb-archive.key | sudo apt-key add - 
+#add-apt-repository "deb http://archive.getdeb.net/ubuntu xenial-getdeb apps"
+#wget -q -O- http://archive.getdeb.net/getdeb-archive.key | sudo apt-key add -
 
 # WineHQ
-cd ~/dotfiles
-sudo dpkg --add-architecture i386 
+cd ~/Github/dotfiles
+sudo dpkg --add-architecture i386
 wget -nc https://dl.winehq.org/wine-builds/Release.key
 sudo apt-key add Release.key
 sudo apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main'
@@ -193,8 +192,11 @@ sudo add-apt-repository 'deb https://typora.io/linux ./'
 sudo apt-get update
 sudo apt-get install -y typora
 
+# Oh-My-Zsh
+sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+
 # Stow
-cd ~/dotfiles
+cd ~/Github/dotfiles
 mv ~/.zshrc ~/.zshrcold
 #stow bash
 stow  zsh
