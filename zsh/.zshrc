@@ -210,7 +210,7 @@ alias la='ls -Alh'
 alias ls='ls --color=always'
 
 # chmod commands
-alias  mx='sudo chmod +x'
+alias mx='sudo chmod +x'
 alias 000='chmod -R 000'
 alias 644='chmod -R 644'
 alias 666='chmod -R 666'
