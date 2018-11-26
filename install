@@ -1,7 +1,7 @@
 # Install Script for all my junk
 # Made with <3 by Multipixelone
 # Set all Variables
-INSTALL_PKGS="atril xcb-proto libjpeg-turbo8-dev libpam0g-dev libxcb-composite0 libxcb-composite0-dev libxcb-image0-dev libxcb-randr0 libxcb-util-dev libxcb-xinerama0 libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-x11-dev feh libev-dev bc zsh i3blocks i3lock i3lock-fancy i3status cmake grip surf help2man terminator intltool perl lxpolkit libasound2-dev libglib2.0-dev libgtk-3-dev lxappearance gtk-chtheme qt4-qtconfig stow unzip dictd git firefox dict-gcide python3 python3-pip filezilla gparted gdebi-core vlc autoconf automake vim sudo"
+INSTALL_PKGS="rofi atril xcb-proto libjpeg-turbo8-dev libpam0g-dev libxcb-composite0 libxcb-composite0-dev libxcb-image0-dev libxcb-randr0 libxcb-util-dev libxcb-xinerama0 libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-x11-dev feh libev-dev bc zsh i3blocks i3lock i3lock-fancy i3status cmake grip surf help2man terminator intltool perl lxpolkit libasound2-dev libglib2.0-dev libgtk-3-dev lxappearance gtk-chtheme qt4-qtconfig stow unzip dictd git firefox dict-gcide python3 python3-pip filezilla gparted gdebi-core vlc autoconf automake vim sudo"
 # HAPPY GREETING
 echo "Multipixelone Dotfiles i3wm Installer"
 echo "MAKE SURE YOU ARE NOTTT RUNNING AS ROOT"
@@ -33,11 +33,11 @@ command -v snap >/dev/null 2>&1 || { sudo apt install snapd; }
 sudo apt-get --yes update && apt-get --yes upgrade
 
 # Install All Applications
-for i in $INSTALL_PKGS; do
-  sudo apt-get install -y $i
-done
+#for i in $INSTALL_PKGS; do
+#  sudo apt-get install -y $i
+#done
 
-exit 0
+#exit 0
 
 # Install setuptools
 pip3 install setuptools
@@ -74,27 +74,27 @@ sudo snap install discord
 # Oh-My-Zsh!
 
 # `light` for light control
-mkdir -p ~/Github
-cd ~/Github
+mkdir -p ~/Documents/Github
+cd ~/Documents/Github
 git clone https://github.com/haikarainen/light.git
 cd light
 make
 sudo make install
 
 # Volumeicon for the volume control
-mkdir -p ~/Github
-cd ~/Github
-git clone https://github.com/Maato/volumeicon.git
-cd volumeicon
-./autogen.sh
-./configure --prefix=/usr
-make
-sudo make install
+#mkdir -p ~/Documents/Github
+#3cd ~/Documents/Github
+#git clone https://github.com/Maato/volumeicon.git
+#cd volumeicon
+#./autogen.sh
+#./configure --prefix=/usr
+#make
+#sudo make install
 
 # Install GPMDP
 #wget "https://github.com/MarshallOfSound/Google-Play-Music-Desktop-Player-UNOFFICIAL-/releases/download/v4.5.0/google-play-music-desktop-player_4.5.0_amd64.deb" -O GPMDP.deb
 #gdebi -nq GPMDP.deb
-snap install google-play-music-desktop-player
+#snap install google-play-music-desktop-player
 
 # Build st (Simple Terminal)
 #cd ~/Github
@@ -105,7 +105,7 @@ snap install google-play-music-desktop-player
 
 # Build i3-gaps
 #mkdir -p ~/Github
-cd ~/Github
+cd ~/Documents/Github
 git clone https://github.com/Airblader/i3.git i3-gaps
 sudo apt-get install --yes libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm0 libxcb-xrm-dev automake
 cd i3-gaps
@@ -129,7 +129,7 @@ wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-icon-
 #snap install Mailspring
 
 # Overpass Font
-cd ~/Github/dotfiles
+cd ~/Documents/Github/dotfiles
 wget https://github.com/RedHatBrand/Overpass/releases/download/3.0.2/overpass-desktop-fonts.zip
 unzip overpass-desktop-fonts.zip
 rm overpass-desktop-fonts.zip
@@ -138,7 +138,7 @@ mv * /usr/share/fonts/
 cd ../overpass-mono
 mv * /usr/share/fonts
 fc-cache -f -v
-cd ~/Github/dotfiles
+cd ~/Documents/Github/dotfiles
 rm -rv overpass overpass-mono
 
 # Sublime
@@ -149,18 +149,18 @@ rm -rv overpass overpass-mono
 #snap install sublime-text
 
 # Iosevka Font
-cd ~/Github/dotfiles
+cd ~/Documents/Github/dotfiles
 wget https://github.com/be5invis/Iosevka/releases/download/v1.14.3/02-iosevka-term-1.14.3.zip -O iosevka.zip
 unzip iosevka.zip
 rm iosevka.zip
 cd ttf/
 mv * /usr/share/fonts/
 fc-cache -f -v
-cd ~/Github/dotfiles
+cd ~/Documents/Github/
 rm -rv ttf/ ttf-unhinted/ woff/ woff2/
 
 # BetterLockScreen
-cd ~/Github
+cd ~/Documents/Github
 git clone https://github.com/PandorasFox/i3lock-color.git
 cd i3lock-color
 autoreconf -i && ./configure && make
@@ -178,7 +178,7 @@ betterlockscreen -u ~/Documents/Backgrounds/Sunrise.jpg
 #wget -q -O- http://archive.getdeb.net/getdeb-archive.key | sudo apt-key add -
 
 # WineHQ
-cd ~/Github/dotfiles
+cd ~/Documents/Github/dotfiles
 sudo dpkg --add-architecture i386
 wget -nc https://dl.winehq.org/wine-builds/Release.key
 sudo apt-key add Release.key
@@ -196,7 +196,7 @@ sudo apt-get install -y typora
 sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
 # Stow
-cd ~/Github/dotfiles
+cd ~/Documents/Github/dotfiles
 mv ~/.zshrc ~/.zshrcold
 #stow bash
 stow  zsh

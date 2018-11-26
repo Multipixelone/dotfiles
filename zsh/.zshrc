@@ -67,6 +67,8 @@ plugins=(
   history
   sudo
   sprunge
+  encode64
+  lol
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -169,6 +171,7 @@ alias d='dict'
 alias c='clear'
 #alias night='night-mode'
 #alias day='day-mode'
+alias relaunch='/home/tunnel/.config/polybar/launch.sh'
 alias please='sudo $(fc -ln -1)'
 alias red='redshift -l 45.523062:-122.676482'
 alias upgradeall='apt update && apt upgrade -y'
@@ -177,7 +180,8 @@ alias wal='wal -e -t'
 alias uke='uke-chords'
 alias mood='mplayer /home/tunnel/dotfiles/mood/0.m4a -loop 0 -volume 50'
 alias home='cd ~/'
-alias dot='cd ~/Github/dotfiles'
+alias dot='cd ~/Documents/Github/dotfiles'
+alias code='cd ~/Documents/Github'
 alias gs='git status'
 # alias drive='cd /media/tunnel/Finn'
 
