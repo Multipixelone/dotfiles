@@ -243,6 +243,7 @@ alias home='cd ~/'
 alias dot='cd ~/Documents/Github/dotfiles'
 alias code='cd ~/Documents/Github'
 alias gs='git status'
+alias kahoot='cd /home/tunnel/Documents/Github/kahoot-tools && node /home/tunnel/Documents/Github/kahoot-tools/kahoot-tools.js'
 # alias drive='cd /media/tunnel/Finn'
 
 drive () {
