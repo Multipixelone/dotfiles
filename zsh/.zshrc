@@ -2,13 +2,21 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export PATH=$PATH:~/Code/bin
 
+#[[ -s /home/tunnel/.autojump/etc/profile.d/autojump.sh  ]] && source /home/tunnel/.autojump/etc/profile.d/autojump.sh
+
+#autoload -U compinit && compinit -u
+
+#ZSH_DISABLE_COMPFIX="true"
+
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/tunnel/.oh-my-zsh"
+export ZSH="/home/tunnel/.oh-my-zsh"
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+export PATH="$PATH:$HOME/bin"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="agnoster" # bureau mh sorin sunrise avit
 #ZSH_THEME="lambda"
 DEFAULT_USER="tunnel"
 
@@ -32,8 +40,7 @@ CASE_SENSITIVE="false"
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
 
-# Uncomment the following line to disable colors in ls.
-DISABLE_LS_COLORS="false"
+# Uncomment the following line to disable cCOLORS="false"
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
