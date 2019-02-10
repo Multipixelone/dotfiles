@@ -1,17 +1,17 @@
 [colors]
-background = #141c21
-foreground = #263640
-accent = #f3d6d2
-background1 = #ceb1ad
-background2 = #d1b4b0
-text = #a1a1a1
+background = #4b5262
+foreground = #434a5a
+blue = #7191b1
+green = #93ae7c
+text = #d8dee8
+red = #bf616a
 
 [settings]
 screenchange-reload = true
 ;throttle-output-for = 10
 ;throttle-output = 5
 ;throttle-input-for = 40
-
+rel
 ;compositing-background = over
 ;compositing-background = screen
 ;compositing-foreground = xor
@@ -26,7 +26,7 @@ margin-bottom = 0
 enable-ipc = true
 ;monitor = ${env:MONITOR:eDP1}
 width = 100%
-height = 45
+height = 40
 ;radius = 5.0
 fixed-center = true
 ;override-redirect = true
@@ -50,11 +50,13 @@ module-margin-left = 0
 module-margin-right = 0
 
 ; FONTS
-font-1 = Font Awesome 5 Free:pixelsize=17;4
-font-2 = Font Awesome 5 Free Solid:pixelsize=17;4
-font-3 = Font Awesome 5 Brands:pixel=50;4
-font-0 = Coder's Crux:pixelsize=26;4
-font-4 = unifont:size=17;4
+font-2 = Font Awesome 5 Free:pixelsize=12;4
+font-3 = Font Awesome 5 Free Solid:pixelsize=12;4
+font-4 = Font Awesome 5 Brands:pixel=12;4
+font-1 = Material Design Icons:pixelsize=18;4.5
+#font-0 = BlexMono Nerd Font:pixelsize=13;4
+font-0 = PixelMix:pixelsize=13;4
+#font-0 = siji:size=13;2
 
 ; OLD MODULES
 ;modules-left = mpd
@@ -63,19 +65,20 @@ font-4 = unifont:size=17;4
 ;modules-right = xkeyboard xbacklight pulseaudio wifi battery memory cpu date power-menu
 
 ; NEW MODULES
-modules-left = mpd
+modules-left = rofia mpd i3 xwindow
 modules-center = date
 ;modules-right = xkeyboard wifi battery pulseaudio
-modules-right = wifi battery pulseaudio
+modules-right = pulseaudio wifi battery
 
 tray-position = right
 tray-padding = 0
 tray-maxsize = 30
+tray-background = ${colors.foreground}
 ;tray-transparent = true
 ;tray-detached = true
 ;tray-offset-x = 50
 
-wm-restack = i3
+;wm-restack = bspwm
 
 ;dim-value = 0.2
 
@@ -93,6 +96,25 @@ wm-restack = i3
 ;bspwm-focused-overline = ${colors.linecolor}
 ;bspwm-focused-underline = #cc333333
 
+[module/ewmh]
+type = internal/xworkspaces
+
+; Only show workspaces defined on the same output as the bar
+;
+; Useful if you want to show monitor specific workspaces
+; on different bars
+;
+; Default: false
+pin-workspaces = true
+
+; Create click handler used to focus desktop
+; Default: true
+enable-click = false
+
+; Create scroll handlers used to cycle desktops
+; Default: true
+enable-scroll = false
+
 [module/i3]
 type = internal/i3
 index-sort = true
@@ -102,39 +124,42 @@ wrapping-scroll = true
 enable-scroll = false
 enable-click = true
 
-ws-icon-0 = 1: School;
-ws-icon-1 = 2: School 2;
-ws-icon-2 = 3: Music;
-ws-icon-3 = 4: Games;
-ws-icon-4 = 5: Terminal;
-ws-icon-5 = 6: Coding;
-ws-icon-6 = 7: Discord;
-ws-icon-default = 
+ws-icon-0 = 1: Workspace 1;
+ws-icon-1 = 2: Workspace 2;
+ws-icon-2 = 3: Workspace 3;
+ws-icon-3 = 4: Workspace 4;
+ws-icon-4 = 5: Music;
+ws-icon-5 = 6: Coding;
+ws-icon-6 = 7: IRC;ﭕ
+ws-icon-7 = 8: Gaming;
+ws-icon-default = 
 
 format = <label-state> <label-mode>
 
 label-mode = %mode%
-label-mode-padding = 10
-label-mode-background = ${colors.accent}
+label-mode-padding = 1
+label-mode-background = ${colors.background}
+label-mode-foreground = ${colors.text}
 
 label-focused = %icon%
-label-focused-background = ${module/bspwm.label-focused-background}
-label-focused-foreground = ${module/bspwm.label-focused-foreground}
-label-focused-overline= ${module/bspwm.label-focused-overline}
-label-focused-underline= ${module/bspwm.label-focused-underline}
-label-focused-padding = 5
+label-focused-background = ${colors.foreground}
+label-focused-foreground = ${colors.text}
+label-focused-overline= ${colors.green}
+label-focused-underline= ${colors.blue}
+label-focused-padding = 1
 
 label-unfocused = %icon%
 ;label-unfocused-foreground = #6b6b6b
 label-unfocused-foreground = #666
-label-unfocused-padding = 5
+label-unfocused-padding = 1
 
-label-urgent = %icon% !
-label-urgent-background = #666
-label-urgent-padding = ${module/bspwm.label-urgent-padding}
+label-urgent = %icon%
+label-urgent-background = ${colors.red}
+label-urgent-foreground = ${colors.text}
+label-urgent-padding = 1
 
 label-visible = %icon%
-label-visible-padding = ${module/bspwm.label-empty-padding}
+label-visible-padding = ${colors.blue}
 
 [module/cpu]
 type = internal/cpu
@@ -159,16 +184,18 @@ interval = 3.0
 format-connected = <label-connected>
 ;format-connected-prefix = " "
 format-connected-prefix-offset = -6
-label-connected = %{F#141c21}%{B#f3d6d2}  %{B#263640}%{F#a1a1a1} %essid%
+label-connected =  %essid%
 label-connected-foreground = ${colors.text}
 label-connected-background = ${colors.foreground}
-label-connected-padding-right = 1
+label-connected-padding = 1
 
 format-disconnected = <label-disconnected>
-format-disconnected-prefix = " "
-format-disconnected-prefix-foreground = #666
-label-disconnected = not connected
+;format-disconnected-prefix = " "
+;format-disconnected-prefix-foreground = #666
+label-disconnected =  not connected
 label-disconnected-foreground = ${colors.text}
+label-disconnected-background = ${colors.foreground}
+label-disconnected-padding = 1
 
 ramp-signal-0 = 
 ramp-signal-1 = 
@@ -196,8 +223,8 @@ label-connected = %local_ip%
 [module/date]
 type = internal/date
 label = %date% at %time%
-date = %a%e %b
-time = %H:%M
+date = %a %e %b
+time = %l:%M %p
 label-foreground = ${colors.text}
 interval = 5
 
@@ -209,6 +236,17 @@ ramp-1 = 
 ramp-2 = 
 ramp-foreground = #666
 label-foreground = ${root.foreground}
+
+[module/rofia]
+type = custom/script
+exec = echo "ﲔ"
+click-left = /home/tunnelmaker/.fvwm/scripts/rofia
+format = <label>
+format-background = ${colors.green}
+format-foreground = ${colors.text}
+format-padding = 1
+
+label = %output:0:15:...%
 
 [module/volume]
 type = internal/volume
@@ -239,35 +277,47 @@ type = internal/battery
 full-at = 98
 time-format = %H:%M
 
-format-charging = <animation-charging> <label-charging>
+format-charging = <animation-charging><label-charging>
 label-charging = %percentage%%
 label-charging-foreground = ${colors.text}
+label-charging-background = ${colors.foreground}
 
-format-discharging = <label-discharging>
-label-discharging = %{F#141c21}%{B#f3d6d2}  %{B#263640}%{F#a1a1a1} %percentage%%
+;format-discharging = <label-discharging>
+format-discharging = <ramp-capacity><label-discharging>
+label-discharging = %percentage%%
 label-discharging-foreground = ${colors.text}
 label-discharging-background = ${colors.foreground}
-label-discharging-padding-right = 1
+label-discharging-padding = 1
 
 format-full = <label-full>
 format-full-prefix = " "
 format-full-prefix-foreground = ${colors.text}
 
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-3 = 
-ramp-capacity-4 = 
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-5 = 
+ramp-capacity-6 = 
+ramp-capacity-7 = 
+ramp-capacity-8 = 
+ramp-capacity-9 = 
 ramp-capacity-foreground = ${colors.text}
-ramp-capacity-background = ${colors.accent}
+ramp-capacity-background = ${colors.foreground}
 
-animation-charging-0 =  
-animation-charging-1 =  
-animation-charging-2 =  
-animation-charging-3 =  
-animation-charging-framerate = 750
-animation-charging-foreground = ${colors.background}
-animation-charging-background = ${colors.accent}
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-5 = 
+animation-charging-6 = 
+animation-charging-7 = 
+animation-charging-framerate = 200
+;animation-charging-framerate = 750
+animation-charging-foreground = ${colors.text}
+animation-charging-background = ${colors.foreground}
 animation-charging-padding-right = 1
 
 ;[module/battery-multi]
@@ -291,13 +341,16 @@ format-offline = <label-offline>
 format-offline-foreground = #777
 
 label-offline = mopidy is off
+label-offline-background = ${colors.blue}
+label-offline-foreground = ${colors.text}
+label-offline-padding = 1
 
-label-song =%{F#141c21}%{B#f3d6d2}  %{B#263640}%{F#a1a1a1} %artist% - %title%
+label-song =  %artist% - %title%
 label-song-ellipsis = false
-label-song-background = ${colors.foreground}
+label-song-background = ${colors.blue}
 label-song-foreground = ${colors.text}
 label-song-margin = 0
-label-song-padding-right = 1
+label-song-padding = 1
 
 label-time-foreground = #777
 
@@ -332,15 +385,19 @@ menu-0-2-foreground = ${colors.linecolor}
 type = internal/pulseaudio
 format-volume = <label-volume>
 
-label-volume = %{F#141c21}%{B#f3d6d2}  %{B#263640}%{F#a1a1a1} %percentage%
-label-volume-padding-right = 1
+label-volume =  %percentage%
+label-volume-padding = 1
+label-volume-foreground = ${colors.text}
+label-volume-background = ${colors.foreground}
 
-label-muted =  muted
-label-muted-foreground = #666
+label-muted =  muted
+label-muted-foreground = ${colors.text}
+label-muted-background = ${colors.foreground}
+label-muted-padding = 1
 
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
 ramp-volume-foreground = #666
 
 ;[module/EWWMENU-menu]
@@ -410,6 +467,13 @@ label-indicator-background = ${colors.accent}
 type = internal/xwindow
 format = <label>
 label-maxlen = 75
+
+label = %title%
+format-background = ${colors.background}
+format-foreground = ${colors.text}
+label-focused-overline= ${colors.green}
+label-focused-underline= ${colors.blue}
+format-padding = 1
 
 [module/counter]
 type = internal/counter
