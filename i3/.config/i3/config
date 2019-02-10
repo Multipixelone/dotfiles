@@ -12,11 +12,15 @@
 set $mod Mod1
 
 # Set Gaps
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 3
 # gaps inner 6
 # gaps outer 6
-gaps inner 15
+gaps inner 12
 gaps outer 3
+
+#bindsym $mod+g gaps outer all set 3; gaps inner all set 60
+#bindsym $mod+h gaps outer all set 3; gaps inner all set 12
+
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -87,7 +91,8 @@ floating_modifier $mod
 #bindsym $mod+Return exec i3-sensible-terminal
 #bindsym $mod+Return exec terminator
 #bindsym $mod+Return exec gnome-terminal
-bindsym $mod+Return exec termite
+#bindsym $mod+Return exec termite
+bindsym $mod+Return exec st
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -101,12 +106,13 @@ bindsym $mod+Shift+q kill
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop #run -nb "$fg" -nf "$bg" -sb "$bg" -sf "$fg"
 #bindsym $mod+space exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+space exec --no-startup-id rofi -show drun -show-icons -theme onedark -font "Coder's Crux 36"
+bindsym $mod+Shift+w exec firefox
 
 # change focus
-#bindsym $mod+j focus left
-#bindsym $mod+k focus down
-#bindsym $mod+l focus up
-#bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -115,10 +121,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -127,7 +133,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+b split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -142,6 +148,8 @@ bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
+
+# Change gap size
 
 # change focus between tiling / floating windows
 #bindsym $mod+space focus mode_toggle
@@ -159,18 +167,18 @@ bindsym $mod+a exec firefox
 #bindsym $mod+o exec --no-startup-id firefox "https://onedrive.live.com/edit.aspx?resid=BF4A7567A03738B8!8466&cid=bf4a7567a03738b8&app=OneNote&wdorigin=ondcauth2,ondcnotebooks,ondchrd"
 #bindsym Mod4+e exec --no-startup-id nautilus
 #bindsym $mod+m exec --no-startup-id firefox http://rainymood.com/
-bindsym $mod+m exec --no-startup-id gnome-terminal -- mplayer /home/tunnel/dotfiles/mood/0.m4a -loop 0 -volume 100
+bindsym $mod+q exec --no-startup-id gnome-terminal -- mplayer /home/tunnel/dotfiles/mood/0.m4a -loop 0 -volume 100
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1: School"
-set $ws2 "2: School 2"
-set $ws3 "3: Music"
-set $ws4 "4: Games"
-set $ws5 "5: Terminal"
+set $ws1 "1: Workspace 1"
+set $ws2 "2: Workspace 2"
+set $ws3 "3: Workspace 3"
+set $ws4 "4: Workspace 4"
+set $ws5 "5: Music"
 set $ws6 "6: Coding"
-set $ws7 "7: Discord"
-set $ws8 "8: None"
+set $ws7 "7: IRC"
+set $ws8 "8: Gaming"
 set $ws9 "9: None"
 set $ws10 "10: None"
 
@@ -179,20 +187,21 @@ set $ws10 "10: None"
 assign [class="Sublime_text"] $ws6
 assign [class="Atom"] $ws6
 assign [class="Mailspring"] $ws2
-assign [class="KeePass2"] $ws8
-assign [class="Google Play Music Desktop Player"] $ws3
+assign [class="KeePass2"] $ws9
+assign [class="Google Play Music Desktop Player"] $ws5
 assign [class="discord"] $ws7
-assign [class="dolphin-emu"] $ws4
-assign [class="Steam"] $ws4
-assign [class="MultiMC5"] $ws4
+assign [class="dolphin-emu"] $ws8
+assign [class="Steam"] $ws8
+assign [class="MultiMC5"] $ws8
 #assign [class="vlc"] $ws3
-assign [class="Gmpc"] $ws3
-assign [instance="battle.net.exe"] $ws4
-assign [class="net-technicpack-launcher-LauncherMain"] $ws4
+assign [class="Gmpc"] $ws5
+assign [instance="battle.net.exe"] $ws8
+assign [class="net-technicpack-launcher-LauncherMain"] $ws8
 #assign [class="VirtualBox Manager"] $ws10
 #assign [class="VirtualBox Machine"] $ws8
 #assign [class="Thunderbird"] $ws2
 #assign [class="Atril"] $ws2
+assign [class="Spotify"] $ws5
 
 # Open apps as floating (stolen from Manjaro)
 # Open specific applications in floating mode
@@ -231,6 +240,8 @@ for_window [class="Thunderbird"] floating enable border normal
 for_window [instance="battle.net.exe"] floating enable border none
 for_window [class="Anki"] floating enable border normal
 
+bindsym --release $mod+x exec --no-startup-id import /tmp/latest-screenshot.png
+
 set $Locker mantablockscreen -cc
 
 # Set restart, shutdown, and locking stuff (From Manjaro)
@@ -250,7 +261,7 @@ mode "$mode_system" {
 }
 
 # Lock and suspend
-bindsym $mod+l exec mantablockscreen -cc #systemctl suspend 
+#bindsym $mod+l exec mantablockscreen -cc #systemctl suspend
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -298,10 +309,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -358,7 +369,7 @@ bindsym $mod+r mode "resize"
 #client.background       $bg
 
 # Set colors from Xresources
-# Change 'color7' and 'color2' to whatever colors you want i3 to use 
+# Change 'color7' and 'color2' to whatever colors you want i3 to use
 # from the generated scheme.
 # NOTE: The '#f0f0f0' in the lines below is the color i3 will use if
 # it fails to get colors from Xresources.
@@ -397,6 +408,8 @@ bindsym XF86AudioMute exec amixer -D pulse set Master toggle
 #bindsym XF86MonBrightnessDown exec "light -U 5; notify-send 'brightness down'" # decrease screen brightness with notification
 
 bindsym Mod4+r exec gedit
+bindsym $Mod+m exec i3-msg 'workspace 5: Music; st'
+
 
 # Colors
 # class                 border  bground text    indicator child_border
@@ -426,13 +439,30 @@ bindsym Mod4+r exec gedit
 
 #client.background       #FFFFFF
 # class                 border  bground text    indicator child_border
-client.focused          #BB8400 #BB8400 #FFFFFF #C7861B   #C7861B
-client.focused_inactive #333333 #5F676A #FFFFFF #333333   #333333
-client.unfocused        #5F676A #222222 #888888 #5F676A   #333333
-client.urgent           #555555 #333333 #FFFFFF #333333   #555555
-client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
+#client.focused          #BB8400 #BB8400 #FFFFFF #C7861B   #C7861B
+#client.focused_inactive #333333 #5F676A #FFFFFF #333333   #333333
+#client.unfocused        #5F676A #222222 #888888 #5F676A   #333333
+#client.urgent           #555555 #333333 #FFFFFF #333333   #555555
+#client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 
-client.background       #FFFFFF
+#client.background       #FFFFFF
+
+#client.unfocused        #4b5262 #4b5262 #FFFFFF #C7861B #C7861B
+#client.focused          #bf616a #bf616a #FFFFFF #C7861B #C7861B
+#client.focused_inactive #ebcb8b #ebcb8b #FFFFFF #C7861B #C7861B
+
+# class                 border  backgr. text    indicator child_border
+client.focused          #4c7899 #285577 #ffffff #2e9ef4   #5f676a
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #393f52
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+client.background       #ffffff
+
+focus_follows_mouse no
+
+no_focus [class=".*"]
 
 # Start Programs on Startup (Last)
 #exec --no-startup-id i3-msg 'workspace 5: Terminal; exec mate-terminal'
@@ -453,7 +483,8 @@ exec --no-startup-id lxpolkit
 #exec --no-startup-id mintupdate-launcher
 exec --no-startup-id xinput set-prop "DLL07BE:01 06CB:7A13 Touchpad" "Synaptics Scrolling Distance" -80, -80
 #exec --no-startup-id wal -e -t -i ~/Documents/Backgrounds/pink.png
-exec --no-startup-id feh --bg-tile ~/Documents/Backgrounds/pink.png
+exec --no-startup-id feh --bg-tile ~/Documents/Backgrounds/gaming-teal.png
+#exec --no-startup-id feh --bg-fill ~/Documents/Backgrounds/Plane.jpg
 exec --no-startup-id xrandr --dpi 180
 exec --no-startup-id xrdb -merge ~/.Xresources
 #exec --no-startup-id /home/tunnel/.config/polybar/launch.sh
