@@ -1,4 +1,4 @@
-set rtp+=/usr/local/lib/python3.6/dist-packages/powerline/bindings/vim/
+set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim/
 
 " Always show statusline
 set laststatus=2
@@ -33,6 +33,7 @@ Plug 'vim-syntastic/syntastic'
 Plug 'yggdroot/indentline'
 Plug 'junegunn/seoul256.vim'
 Plug 'amix/vim-zenroom2'
+Plug 'lilydjwg/colorizer'
 " Plug 'Yggdroot/LeaderF'
 call plug#end()
 
@@ -48,14 +49,19 @@ let g:limelight_conceal_ctermfg = 240
 " Limelight upon Goyo
 function! s:goyo_enter()
   Limelight
+  " colorscheme seoul256
   " ...
 endfunction
 
 function! s:goyo_leave()
   Limelight!
+  " colorscheme default
   " ...
 endfunction
 
+:autocmd BufReadPre,FileReadPre *.md :Goyo
+:autocmd BufWritePost *.md silent! execute "!/home/tunnel/Documents/Programs/MDPDF/Pandoc.sh \"%:p\" &>/dev/null" | redraw!
+" :autocmd BufWritePost *.md silent! execute "!/home/tunnel/Documents/Programs/MDPDF/Pandoc.sh \"%:p\"" | redraw!
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
@@ -93,7 +99,7 @@ let g:indentLine_char = '▏'
 "endfunction
 
 " Goyo if Markdown
-autocmd FileType markdown call goyo
+" autocmd FileType markdown call goyo
 " #autocmd FileType markdown colorscheme pencil
 
 " Turn on Numbers~
@@ -347,7 +353,7 @@ map <leader>h :bprevious<cr>
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
+" map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove
 map <leader>t<leader> :tabnext
 
