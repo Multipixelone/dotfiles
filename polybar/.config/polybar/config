@@ -55,7 +55,8 @@ font-3 = Font Awesome 5 Free Solid:pixelsize=12;4
 font-4 = Font Awesome 5 Brands:pixel=12;4
 font-1 = Material Design Icons:pixelsize=18;4.5
 #font-0 = BlexMono Nerd Font:pixelsize=13;4
-font-0 = PixelMix:pixelsize=13;4
+#font-0 = PixelMix:pixelsize=13;4
+font-0 = undefined medium:pixelsize=18;3
 #font-0 = siji:size=13;2
 
 ; OLD MODULES
