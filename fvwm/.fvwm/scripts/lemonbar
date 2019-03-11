@@ -1,0 +1,12 @@
+#p 'trap - TERM; kill 0' INT TERM QUIT EXIT
+conky | lemonbar \
+-f "PixelMix:size=8" \
+-o 0 \
+-f "Font Awesome 5 Free:size=8" \
+-o 2 \
+-f "Font Awesome 5 Free Solid:size=8" \
+-o 1 \
+-g x36 \
+-F "#d8dee8" \
+-B "#4b5262" \
+#| sh

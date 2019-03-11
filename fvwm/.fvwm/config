@@ -1,0 +1,570 @@
+##                 _               __                 __
+##   ___ ___ _  __(_)______  ___  / /___ _  ___ ___  / /_
+##  / -_) _ \ |/ / / __/ _ \/ _ \/ __/  ' \/ -_) _ \/ __/
+##  \__/_//_/___/_/_/  \___/_//_/\__/_/_/_/\__/_//_/\__/
+##
+
+## Set The Thumbnail Cache Folder
+SetEnv cache $[HOME]/.fvwm/cache/
+
+## Set The Scripts Folder
+SetEnv scripts $[HOME]/.fvwm/scripts
+
+## Where The Titlebar Icons Are Stored
+SetEnv icons $[HOME]/.fvwm/icons
+
+
+##     ___              __  _
+##    / _/_ _____  ____/ /_(_)__  ___  ___
+##   / _/ // / _ \/ __/ __/ / _ \/ _ \(_-<
+##  /_/ \_,_/_//_/\__/\__/_/\___/_//_/___/
+##
+
+## Autostart
+# Start or restart
+DestroyFunc StartFunction
+AddToFunc   StartFunction
+#+ I Test Exec exec hsetroot -tile ~/.fvwm/images/gaming-teal.png
+# Only execute once
+DestroyFunc InitFunction
+AddToFunc InitFunction
++ I Exec exec xsettingsd &
++ I Exec exec xbacklight -set 10
++ I Exec exec dunst &
++ I Exec exec feh --bg-tile ~/Documents/Backgrounds/gaming-teal.png
+#+ I Exec exec /home/tunnel/.fvwm/scripts/lemonbar
++ I Exec exec /home/tunnel/.config/polybar/launch.sh
++ I Exec exec mopidy
++ I Exec exec compton
++ I Exec exec syncthing -no-browser -home="/home/tunnel/.config/syncthing"
++ I Exec exec nm-applet
++ I Exec exec blueberry-tray
++ I Exec exec lxpolkit
++ I Exec exec sh -c '/usr/bin/nvidia-settings --load-config-only'
++ I Exec exec /usr/bin/gnome-keyring-daemon --start --components=ssh
+
+## To Create a Thumbnail on Minimize
+# Call the script to create a thumbnail using ImageMagick & xwd
+DestroyFunc Thumbnail
+AddToFunc Thumbnail
++ I ThisWindow (Shaded) WindowShade
++ I PipeRead 'bash $[scripts]/crthumb "$[w.id]" "$[cache]"'
+# Restore the window
+DestroyFunc DeThumbnail
+AddToFunc DeThumbnail
++ I PipeRead 'bash $[scripts]/dethumb "$[w.id]" "$[cache]"'
+*FvwmEvent: deiconify DeThumbnail
+
+## To Toggle The Titlebar
+DestroyFunc ToggleTitle
+AddToFunc   ToggleTitle
++ I ThisWindow (State 1) WindowStyle Title
++ I TestRc (Match) State 1 False
++ I TestRc (Match) Break
++ I WindowStyle !Title
++ I State 1 True
+
+## Window Snapping
+# Snap left
+DestroyFunc SnapLeft
+AddToFunc SnapLeft
++ I Move 0 0
++ I Maximize True 50 100
++ I Raise
+# Snap right
+DestroyFunc SnapRight
+AddToFunc SnapRight
++ I Maximize True 50 100
++ I Move -0 0
++ I Raise
+# Zoom unmaximize large
+DestroyFunc SnapHalf
+AddToFunc SnapHalf
++ I Maximize True 75 75
++ I Move 50-50w 50-50w
++ I Raise
+# Zoom unmaximize small
+DestroyFunc SnapQuarter
+AddToFunc SnapQuarter
++ I Maximize True 50 50
++ I Move 50-50w 50-50w
++ I Raise
+# Zoom unmaximize tiny
+DestroyFunc SnapTiny
+AddToFunc SnapTiny
++ I Maximize True 36 28
++ I Move 50-50w 50-50w
++ I Raise
+
+## Raising Window
+DestroyFunc RaiseMoveX
+AddToFunc RaiseMoveX
++ I Raise
++ M $0
++ D $1
+DestroyFunc RaiseMove
+AddToFunc RaiseMove
++ I Raise
++ M $0
+
+
+##     __            __   _         __
+##    / /_____ __ __/ /  (_)__  ___/ /__
+##   /  '_/ -_) // / _ \/ / _ \/ _  (_-<
+##  /_/\_\\__/\_, /_.__/_/_//_/\_,_/___/
+##           /___/
+
+## Common Keybinds
+# Ignore Numlock and other modifiers for bindings
+IgnoreModifiers L25
+# Launching apps
+Key space A 1 Exec $[scripts]/rofia
+Key Print A 1 Exec $[scripts]/screeny
+Key Return A 1S Exec $[scripts]/urdraw
+Key Return A 1 Exec st
+Key w A 1S Exec firefox
+Key f A 1S Exec thunar
+Key g A 1S Exec geany
+# Volume control
+Key XF86AudioRaiseVolume A A Exec amixer -D pulse sset Master unmute 5%+
+Key XF86AudioLowerVolume A A Exec amixer -D pulse sset Master unmute 5%-
+Key XF86AudioMute A A Exec amixer -D pulse sset Master toggle
+# Backlight Control
+Key XF86MonBrightnessUp A A Exec light -A 5
+Key XF86MonBrightnessDown A A Exec light -U 5
+# Music control
+Key XF86AudioNext A A Exec mpc next
+Key XF86AudioPrev A A Exec mpc prev
+Key XF86AudioPlay A A Exec mpc toggle
+Key XF86AudioStop A A Exec mpc stop
+Key m A 1S Exec notify-send "Now Playing ♫" "$(mpc current)"
+# Check time and date
+Key i A 1 Exec notify-send "$(LANG=en_US.utf8 LC_TIME=en_US.utf8 date +'%H:%M')" \
+"$(LANG=en_US.utf8 LC_TIME=en_US.utf8 date +'%A %-d %B %Y')"
+
+## Workspace & window Bindings
+# Close, maximize, and minimize, keep on top
+Key q WT 1S Close
+Key f WT 1 Maximize
+Key t WT 1 Thumbnail
+Key T WT 1S Layer
+# Super + 1-4 to switch workspace
+Key 1 A 1 GotoPage 0 0
+Key 2 A 1 GotoPage 1 0
+Key 3 A 1 GotoPage 2 0
+Key 4 A 1 GotoPage 3 0
+Key 5 A 1 GotoPage 4 0
+Key 6 A 1 GotoPage 5 0
+# Super + Shift + 1-4 to send to another workspace
+Key 1 A 1S MovetoPage 0 0
+Key 2 A 1S MovetoPage 1 0
+Key 3 A 1S MovetoPage 2 0
+Key 4 A 1S MovetoPage 3 0
+Key 5 A 1S MovetoPage 4 0
+Key 6 A 1S MovetoPage 5 0
+
+SetEnv DIR Next
+
+AddToFunc FocusRaiseAndStuff
++ I Iconify off
++ I Focus
++ I Raise
+
+AddToFunc SwitchWindow
++ I $[DIR] (CurrentPage, !Iconic, !Sticky) FocusRaiseAndStuff
++ I Deschedule 134000
++ I PipeRead `[ "$[DIR]" == "Prev"  ] && \
+    echo 'SetEnv NDIR Next' || \
+    echo 'SetEnv NDIR Prev'`
++ I Schedule 700 134000 SetEnv DIR $[NDIR]
+
+Key Tab A M  SwitchWindow
+
+# Custom Focus Function
+#DestroyFunc MyFocusFunc
+#AddToFunc MyFocusFunc
+#+ I Iconify of#f
+#+ I FlipFocus
+#+ I Raise
+#+ I WarpToWindow !raise 5 5
+
+# Key Bindings
+#Key Tab A M Next (CurrentDesk, AcceptsFocus) MyFocusFunc
+#Key Tab A SM Prev (CurrentDesk, AcceptsFocus) MyFocusFunc
+# Control + Alt + Left/Right like usual
+Key Left A CM GotoPage -1p +0p
+Key Right A CM GotoPage +1p +0p
+# Window snapping
+Key Left A 1 SnapLeft
+Key Right A 1 SnapRight
+Key Up A 1 SnapHalf
+Key Down A 1 SnapQuarter
+Key n A 1 SnapTiny
+# Move to the edge of the screen
+Key Left A C1 Move 0 w+0
+Key Right A C1 Move -0 w+0
+Key Up A C1 Move w+0 0
+Key Down A C1 Move w+0 -0
+# Move to the center of the screen
+Key a A 1 Move 50-50w 50-50w
+# Free move using mouse
+Key m A M Move
+# Free resize using mouse
+Key r A M Resize
+# Toggle window decoration
+key d WT 1 ToggleTitle
+
+
+##                             __   _         __
+##    __ _  ___  __ _____ ___ / /  (_)__  ___/ /__
+##   /  ' \/ _ \/ // (_-</ -_) _ \/ / _ \/ _  (_-<
+##  /_/_/_/\___/\_,_/___/\__/_.__/_/_//_/\_,_/___/
+##
+
+## Double Click Delay
+ClickTime 250
+MoveThreshold 3
+
+## Focus on Hover Instead of ClickToFocus
+Style * SloppyFocus, MouseFocusClickRaises
+
+## Titlebar Buttons
+Mouse 1 1 A Menu MenuWindowOps Delete
+Mouse 1 2 A Close
+Mouse 1 4 A Thumbnail
+
+## Titlebar Itself
+Mouse 1	T A RaiseMoveX Move Maximize
+Mouse 1	FS A RaiseMove Resize
+Mouse 4	T A WindowShade True
+Mouse 5	T A WindowShade False
+Mouse 3	T A Menu MenuWindowOps
+
+## Rootmenu on The Desktop
+Mouse 1	R A Menu MenuFvwmRoot
+Mouse 2	R A WindowList
+Mouse 3	R A Menu MenuWindowOpsLong
+
+## On minimized windows
+Mouse 1 I A Iconify off
+Mouse 3 I A Menu MenuIconOps
+
+
+##
+##    __ _  ___ ___  __ _____
+##   /  ' \/ -_) _ \/ // (_-<
+##  /_/_/_/\__/_//_/\_,_/___/
+##
+
+## Menu Styling
+MenuStyle * MenuColorset 5, ActiveColorset 6, GreyedColorset 7, TitleColorset 8
+MenuStyle * Hilight3DOff, HilightBack, HilightTitleBack, SeparatorsLong
+MenuStyle * TrianglesSolid, TrianglesUseFore
+MenuStyle * ItemFormat "%|%4.2i%5.3l%5.3>%|"
+MenuStyle * Font "xft:Sans:Regular:size=10:antialias=True"
+
+## Root Menu on The Desktop
+DestroyMenu MenuFvwmRoot
+AddToMenu   MenuFvwmRoot "Quick Menu" Title
++ "&Terminal" Exec exec st
++ "&Shortcut" Popup MenuPrograms
++ "" Nop
++ "Re&fresh" Refresh
++ "&Restart" Restart
++ "&Suspend" Exec exec systemctl suspend
++ "S&hutdown" Exec exec shutdown now
++ "&Quit" Module FvwmScript FvwmScript-ConfirmQuit
++ "" Nop
+
+## Root Menu >> Shortcut
+DestroyMenu MenuPrograms
+AddToMenu   MenuPrograms "Shortcut" Title
+Test (x audacious) + "Audacious" Exec exec audacious
+Test (x typora) + "Typora" Exec exec typora
+Test (x firefox) + "Firefox" Exec exec firefox
+Test (x geany) + "Geany" Exec exec geany
+Test (x gimp) + "Gimp" Exec exec gimp
+Test (x inkscape) + "Inkscape" Exec exec inkscape
+Test (x thunar) + "Thunar" Exec exec thunar
+Test (x vlc) + "VLC" Exec exec vlc
+
+## Titlebar Right Click
+DestroyMenu MenuWindowOps
+AddToMenu   MenuWindowOps
++ "Send To" Popup MenuSendTo
++ "Move" Move
++ "Resize" Resize
++ "Iconify" Iconify
++ "Maximize" Maximize
++ "Shade" WindowShade
++ "Stick" Stick
++ "" Nop
++ "Close" Close
++ "More..." Menu MenuWindowOpsLong This 0 0
+
+## Titlebar Right Click >> More
+DestroyMenu MenuWindowOpsLong
+AddToMenu   MenuWindowOpsLong
++ "Send To" Popup MenuSendTo
++ "Move" Move
++ "Resize" Resize
++ "(De)Iconify" Iconify
++ "(Un)Maximize" Maximize
++ "(Un)Shade" WindowShade
++ "(Un)Sticky" Stick
++ "(No)TitleBar" Pick (CirculateHit) ToggleTitle
++ "" Nop
++ "Close" Close
++ "Destroy" Destroy
++ "" Nop
++ "Raise" Raise
++ "Lower" Lower
++ "" Nop
++ "StaysOnTop" Pick (CirculateHit) Layer 0 6
++ "StaysPut" Pick (CirculateHit) Layer 0 4
++ "StaysOnBottom" Pick (CirculateHit) Layer 0 2
++ "" Nop
++ "Identify" Module FvwmIdent
+
+## Right Click on Minimized Window
+DestroyMenu MenuIconOps
+AddToMenu   MenuIconOps
++ "(De)Iconify" Iconify
++ "(Un)Maximize" Maximize
++ "(Un)Shade" WindowShade
++ "(Un)Sticky" Stick
++ "(No)TitleBar" Pick (CirculateHit) ToggleTitle
++ "" Nop
++ "Close" Close
++ "Destroy" Destroy
++ "" Nop
++ "Raise" Raise
++ "Lower" Lower
++ "" Nop
++ "StaysOnTop" Pick (CirculateHit) Layer 0 6
++ "StaysPut" Pick (CirculateHit) Layer 0 4
++ "StaysOnBottom" Pick (CirculateHit) Layer 0 2
++ "" Nop
++ "Identify" Module FvwmIdent
+
+## Titlebar Right Click >> Send To
+DestroyMenu MenuSendTo
+AddToMenu MenuSendTo
++ " Workspace 1 " MoveToPage 0 0
++ " Workspace 2 " MoveToPage 1 0
++ " Workspace 3 " MoveToPage 2 0
++ " Workspace 4 " MoveToPage 3 0
+
+
+##             __                 __
+##   _______  / /__  _______ ___ / /_
+##  / __/ _ \/ / _ \/ __(_-</ -_) __/
+##  \__/\___/_/\___/_/ /___/\__/\__/
+##
+
+## Common Colorset
+# Default
+Colorset 0 fg #d8dee8, bg #2f343f, hi, sh, Plain, NoShape
+# Inactive windows
+Colorset 1 fg #4b5262, bg #4b5262, hi, sh, Plain, NoShape
+# Active windows
+Colorset 2 fg #bf616a, bg #bf616a, hi, sh, Plain, NoShape
+# Inactive windows borders
+Colorset 3 fg #4b5262, bg #4b5262, hi #4b5262, sh #4b5262, Plain, NoShape
+# Active windows borders
+Colorset 4 fg #bf616a, bg #bf616a, hi #bf616a, sh #bf616a, Plain, NoShape
+# Menu inactive item
+Colorset 5 fg #4f5159, bg #ffffff, hi #ffffff, sh #ffffff, Plain, NoShape
+# Menu active item
+Colorset 6 fg #bf616a, bg #ffffff, hi #ffffff, sh #ffffff, Plain, NoShape
+# Menu grayed item
+Colorset 7 fg #7a7a7a, bg #ffffff, hi #ffffff, sh #ffffff, Plain, NoShape
+# Menu title
+Colorset 8 fg #2f343f, bg #ffffff, hi #ffffff, sh #ffffff, Plain, NoShape
+# Reserved
+Colorset 10 fg #d8dee8, bg #2f343f, hi #2f343f, sh #2f343f, Plain, NoShape
+# Module default
+Colorset 10 fg #d8dee8, bg #2f343f, hi #2f343f, sh #2f343f, Plain, NoShape
+# Module highlight
+Colorset 11 fg #4b5262, bg #2f343f, hi #2f343f, sh #2f343f, Plain, NoShape
+# Module active buttons (mouse hover)
+Colorset 12 fg #bf616a, bg #2f343f, hi, sh, Plain, NoShape
+# Pager active page
+Colorset 13 fg #2f343f, bg #2f343f, hi, sh, Plain, NoShape
+# Iconified buttons
+Colorset 14 fg #d8dee8, bg #2f343f, hi #2f343f, sh #2f343f, Plain, NoShape
+
+## Special Colorset
+# Special black
+Colorset 20 fg #4b5262, bg #4b5262, hi #4b5262, sh #4b5262, Plain, NoShape
+# Special red
+Colorset 21 fg #bf616a, bg #bf616a, hi #bf616a, sh #bf616a, Plain, NoShape
+# Special green
+Colorset 22 fg #a3be8c, bg #a3be8c, hi #a3be8c, sh #a3be8c, Plain, NoShape
+# Special yellow
+Colorset 23 fg #ebcb8b, bg #ebcb8b, hi #ebcb8b, sh #ebcb8b, Plain, NoShape
+# Special blue
+Colorset 24 fg #81a1c1, bg #81a1c1, hi #81a1c1, sh #81a1c1, Plain, NoShape
+# Special magenta
+Colorset 25 fg #b48ead, bg #b48ead, hi #b48ead, sh #b48ead, Plain, NoShape
+# Special cyan
+Colorset 26 fg #89d0bA, bg #89d0bA, hi #89d0bA, sh #89d0bA, Plain, NoShape
+# Special white
+Colorset 27 fg #e5e9f0, bg #e5e9f0, hi #e5e9f0, sh #e5e9f0, Plain, NoShape
+# Special lightblack
+Colorset 28 fg #434a5a, bg #434a5a, hi #434a5a, sh #434a5a, Plain, NoShape
+# Special lightred
+Colorset 29 fg #b3555e, bg #b3555e, hi #b3555e, sh #b3555e, Plain, NoShape
+# Special lightgreen
+Colorset 30 fg #93ae7c, bg #93ae7c, hi #93ae7c, sh #93ae7c, Plain, NoShape
+# Special lightyellow
+Colorset 31 fg #dbbb7b, bg #dbbb7b, hi #dbbb7b, sh #dbbb7b, Plain, NoShape
+# Special lighblue
+Colorset 32 fg #7191b1, bg #7191b1, hi #7191b1, sh #7191b1, Plain, NoShape
+# Special lightmagenta
+Colorset 33 fg #a6809f, bg #a6809f, hi #a6809f, sh #a6809f, Plain, NoShape
+# Special lightcyan
+Colorset 34 fg #7dbba8, bg #7dbba8, hi #7dbba8, sh #7dbba8, Plain, NoShape
+# Special lightwhite
+Colorset 35 fg #d1d5dc, bg #d1d5dc, hi #d1d5dc, sh #d1d5dc, Plain, NoShape
+
+
+##         __       ___
+##    ___ / /___ __/ (_)__  ___ _
+##   (_-</ __/ // / / / _ \/ _ `/
+##  /___/\__/\_, /_/_/_//_/\_, /
+##          /___/         /___/
+
+## Default Font
+DefaultFont "xft:Sans:Regular:size=16:antialias=True"
+
+## Place It On Center instead of MinOverlapPlacement
+Style * PositionPlacement Center
+Style * GrabFocusOff, !UsePPosition
+Style * NoTitle
+
+## Transient Windows, Such as Open File Windows
+Style * DecorateTransient, StackTransientParent
+Style * !FPGrabFocusTransient, FPReleaseFocusTransient
+
+## Window Shade / Roll Up
+Style * WindowShadeScrolls, WindowShadeSteps 10
+
+## Disable Icons from Appearing on Desktop
+Style * !Icon
+
+## Decoration Styles
+#Style * TitleAtBottom
+Style * ResizeHintOverride
+#Style * BorderWidth 8, HandleWidth 8
+Style * BorderWidth 0, HandleWidth 8
+Style * Colorset 1, HilightColorset 2
+Style * BorderColorset 3, HilightBorderColorset 4
+
+## Window Specific Styles
+Style ConfirmQuit !Title, PositionPlacement Center, WindowListSkip, Layer 6
+Style FvwmIdent WindowListSkip
+
+## Special Rules
+Style Audacious* Colorset 28, BorderColorset 28
+Style Evince* Colorset 29, BorderColorset 29
+Style Firefox* Colorset 30, BorderColorset 30
+Style Geany* Colorset 24, BorderColorset 24
+Style Gimp* Colorset 25, BorderColorset 25
+Style Inkscape* Colorset 26, BorderColorset 26
+Style Thunar* Colorset 22, BorderColorset 22
+Style URxvt* Colorset 23, BorderColorset 23
+Style st* Colorset 23, BorderColorset 23
+Style Viewnior* Colorset 31, BorderColorset 31
+Style vim* Colorset 27, BorderColorset 27
+Style Visualboy* Colorset 26, BorderColorset 26
+Style retroarch* Colorset 26, BorderColorset 26
+Style bar* !Title, BorderWidth 0, HandleWidth 0
+Style polybar* !Title,BorderWidth 0, HandleWidth 0
+
+##       __                      __  _
+##   ___/ /__ _______  _______ _/ /_(_)__  ___
+##  / _  / -_) __/ _ \/ __/ _ `/ __/ / _ \/ _ \
+##  \_,_/\__/\__/\___/_/  \_,_/\__/_/\___/_//_/
+##
+
+# Buttons Locations 1 3 5 7 9 T T T T T 0 8 6 4 2
+# 2 >> Close, 4 >> Maximize, 6 >> Minimize, 1 >> Window Menu
+#TitleStyle Centered Height 56 -- Flat
+TitleStyle
+#ButtonStyle Reset
+#ButtonStyle All -- Flat
+#ButtonStyle All -- UseTitleStyle
+#AddButtonStyle All Vector 2 1x1@4 1x1@4
+#AddButtonStyle 2 \
+#	ActiveUp (Pixmap $[icons]/a.png -- Flat) \
+#	ActiveDown (Pixmap $[icons]/a.png -- Flat) \
+#	Inactive (Pixmap $[icons]/a.png -- Flat)
+#AddButtonStyle 4 \
+#	ActiveUp (Pixmap $[icons]/b.png -- Flat) \
+#	ActiveDown (Pixmap $[icons]/b.png -- Flat) \
+#	Inactive (Pixmap $[icons]/b.png -- Flat)
+#AddButtonStyle 1 \
+#	ActiveUp (Pixmap $[icons]/dpad.png -- Flat) \
+#	ActiveDown (Pixmap $[icons]/dpad.png -- Flat) \
+#	Inactive (Pixmap $[icons]/dpad.png -- Flat)
+
+
+##                   __     __
+##    __ _  ___  ___/ /_ __/ /__ ___
+##   /  ' \/ _ \/ _  / // / / -_|_-<
+##  /_/_/_/\___/\_,_/\_,_/_/\__/___/
+
+## FvwmIdent
+# To get various window info
+# Used in Titlebar Right Click >> More >> Identify
+DestroyModuleConfig FvwmIdent:*
+*FvwmIdent: Colorset 10
+*FvwmIdent: Font "xft:Sans:Regular:size=16:antialias=True"
+
+## FvwmScript
+# To create desktop widget like date time & quit popup menu
+# Only used for quit popup menu this time
+DestroyModuleConfig FvwmScript:*
+*FvwmScript: DefaultColorset 10
+
+
+##     ___  ___ ____ ____ ____
+##    / _ \/ _ `/ _ `/ -_) __/
+##   / .__/\_,_/\_, /\__/_/
+##  /_/        /___/
+##
+
+## Workspace
+DesktopSize 6x1
+EdgeScroll 0 0
+EdgeResistance 150 150
+EdgeThickness 1
+Style * EdgeMoveDelay 350
+Style * EdgeMoveResistance 350
+EwmhBaseStruts 12 12 40 12
+
+## Workspace Indicator
+DestroyModuleConfig FvwmPager: *
+AddToFunc StartFunction
++ I Module FvwmPager
+*FvwmPager: font none
+*FvwmPager: Rows 1
+*FvwmPager: Column 4
+*FvwmPager: Fore #434a5a
+*FvwmPager: Back #2f343f
+*FvwmPager: Hilight #4b5262
+*FvwmPager: SolidSeparators
+*FvwmPager: UseSkipList
+#*FvwmPager: Geometry 128x18-12-12
+*FvwmPager: Geometry 256x36-24-24
+*FvwmPager: WindowBorderWidth 0
+Style FvwmPager !Title, !Borders, StaysOnBottom, Sticky
+
+## Test visible windows
+OpaqueMoveSize unlimited
+#Style "*" ResizeOpaque
+
+## Minimize to Thumbnail Placeholder
+Style * IconBox 400x768+12+40, IconGrid 15 15, \
+IconFill top left, !IconTitle, IconBackgroundRelief 0
