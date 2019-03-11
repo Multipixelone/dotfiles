@@ -8,6 +8,14 @@
 set -gx PATH /home/linuxbrew/.linuxbrew/bin $PATH
 set -gx PATH ~/bin $PATH
 
+# Add the function to make a backup of a file before editing it
+function vimbak
+    echo "You are making a copy of $1 before you open it. Press enter to continue."
+    read nul
+    cp $argv $argv.bak
+    vim $argv
+end
+
 # Add the transfer.sh alias - NOT WORKING IN FISH / TRANSFER IS DOWN
 #transfer() { 
     # check arguments
