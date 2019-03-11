@@ -102,8 +102,11 @@ alias ports="netstat -tulanp"
 alias wget="wget -c"
 
 # Add ls aliases
-alias la="ls -lAh"
+alias la="ls -lAhF --color=always"
 alias ls="ls --color=always"
+
+# Color in less
+alias less="less -R"
 
 # Add chmod aliases
 alias mx="sudo chmod +x"
