@@ -63,10 +63,10 @@ endfunction
 :autocmd BufReadPre,FileReadPre *.md :Goyo
 autocmd BufNewFile *.rmd 0r ~/tufte.rmd
 :autocmd BufWritePost *.md silent! execute "!/home/tunnel/Documents/Programs/MDPDF/Pandoc.sh \"%:p\" &>/dev/null" | redraw!
-" :autocmd BufWritePost *.md silent! execute "!/home/tunnel/Documents/Programs/MDPDF/Pandoc.sh \"%:p\"" | redraw!
 :autocmd BufWritePost *.rmd silent execute "!rmd <afile>" | redraw!
 " :autocmd BufWritePost *.rmd silent! execute R -r "rmarkdown::render <afile>" | redraw!
 " :autocmd BufWritePost *.rmd silent execute "!R -e \"rmarkdown::render(\'%:p\')\"" | redraw!
+":autocmd BufWritePost *.md silent! execute "!/home/tunnel/Documents/Programs/MDPDF/Pandoc.sh \"%:p\"" | redraw!
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
