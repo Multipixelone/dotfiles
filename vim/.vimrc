@@ -38,6 +38,10 @@ Plug 'lilydjwg/colorizer'
 " Plug 'Yggdroot/LeaderF'
 call plug#end()
 
+" Spell checking
+set spelllang=en
+set spell
+
 " NERDTree with simple command
 map <F2> :NERDTreeToggle<cr>
 " map <C-Right> :tabn<cr>
