@@ -70,6 +70,8 @@ autocmd BufNewFile *.rmd 0r ~/tufte.rmd
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
+set pastetoggle=<F3>
+
 " Set Shell
 " :set shell=zsh\ -l
 
