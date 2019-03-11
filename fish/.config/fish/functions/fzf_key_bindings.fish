@@ -1,0 +1,1 @@
+/home/tunnel/.fzf/shell/key-bindings.fish
