@@ -126,4 +126,4 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
 # Add thefuck for command checking
-#thefuck --alias | source
+thefuck --alias | source
