@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+{
+    R -e "rmarkdown::render('$1')"
+    NAME=${1%????}
+    PDF="$NAME.pdf"
+    pkill mupdf
+    mupdf $PDF &
+} #&> /dev/null &
