@@ -43,7 +43,7 @@ call plug#end()
 
 " Spell checking
 set spelllang=en
-set spell
+" set spell
 
 " Airline
 let g:airline_powerline_fonts = 1
@@ -75,6 +75,8 @@ endfunction
 ":autocmd BufReadPre,FileReadPre *.md :Goyo
 autocmd BufNewFile *.rmd 0r ~/tufte.rmd
 " :autocmd BufWritePost *.md silent! execute "!/home/tunnel/Documents/Programs/MDPDF/Pandoc.sh \"%:p\" &>/dev/null" | redraw!
+:autocmd BufNewFile *.rmd :Goyo
+:autocmd BufNewFile,FileReadPre *.rmd set spell
 :autocmd BufWritePost *.rmd silent execute "!rmd <afile>" | redraw!
 " :autocmd BufWritePost *.rmd silent! execute R -r "rmarkdown::render <afile>" | redraw!
 " :autocmd BufWritePost *.rmd silent execute "!R -e \"rmarkdown::render(\'%:p\')\"" | redraw!
