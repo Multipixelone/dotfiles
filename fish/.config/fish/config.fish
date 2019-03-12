@@ -71,6 +71,17 @@ set -gx VISUAL vim
 # Remove fish greeting
 set fish_greeting
 
+# Remove vi mode??
+function fish_mode_prompt
+end
+
+# Install oh-my-fish
+if not functions -q omf
+    set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
+    curl -L https://get.oh-my.fish | fish
+    fish -c omf
+end
+
 # Add default aliases
 alias upgradeall="sudo apt update; sudo apt upgrade -y; sudo apt autoremove -y"
 alias c="clear"
