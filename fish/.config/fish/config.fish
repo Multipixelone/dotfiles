@@ -77,9 +77,8 @@ end
 
 # Install oh-my-fish
 if not functions -q omf
-    set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
-    curl -L https://get.oh-my.fish | fish
-    fish -c omf
+	curl -L https://get.oh-my.fish > install
+	fish install --path=~/.local/share/omf --config=~/.config/omf
 end
 
 # Add default aliases
