@@ -87,7 +87,7 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 set pastetoggle=<F3>
 
 " Set Shell
-" :set shell=zsh\ -l
+:set shell=fish\ -l
 
 " Preview markdown file
 " map F3 ! mdprevpdf %
