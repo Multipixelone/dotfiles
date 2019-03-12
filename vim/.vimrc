@@ -1,4 +1,5 @@
-set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+" Remove powerline in favor of airline :)
+" set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim/
 
 " Always show statusline
 set laststatus=2
@@ -35,12 +36,19 @@ Plug 'yggdroot/indentline'
 Plug 'junegunn/seoul256.vim'
 Plug 'amix/vim-zenroom2'
 Plug 'lilydjwg/colorizer'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 " Plug 'Yggdroot/LeaderF'
 call plug#end()
 
 " Spell checking
 set spelllang=en
 set spell
+
+" Airline
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'bubblegum'
+let g:airline#extensions#tabline#enabled = 1
 
 " NERDTree with simple command
 map <F2> :NERDTreeToggle<cr>
@@ -104,7 +112,7 @@ let g:indentLine_char = '▏'
 
 " Define Markdown Function
 "function MarkdownGoyo()
-"    Goyo
+" "    Goyo
 "    call <SID>goyo_enter()
 "    colo seoul256
 "endfunction
@@ -118,7 +126,7 @@ set number
 
 " Use 256 colours (Use this setting only if your terminal supports 256 colours)
 set t_Co=256
-colorscheme solarized
+" colorscheme solarized
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maintainer:
