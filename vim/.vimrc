@@ -20,7 +20,8 @@ Plug 'tomtom/tcomment_vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'reedes/vim-colors-pencil'
-" Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
+Plug 'w0rp/ale'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-fugitive'
@@ -28,7 +29,7 @@ Plug '/usr/local/opt/fzf'
 " Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
 Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+:Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'jiangmiao/auto-pairs'
 Plug 'vim-syntastic/syntastic'
 " Plug 'tpope/vim-markdown'
@@ -45,6 +46,8 @@ call plug#end()
 set spelllang=en
 " set spell
 
+" :set mouse=a
+"
 " Airline
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'bubblegum'
