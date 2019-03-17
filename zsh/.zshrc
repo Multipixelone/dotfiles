@@ -16,8 +16,10 @@ export PATH="$PATH:$HOME/bin"
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster" # bureau mh sorin sunrise avit
+#ZSH_THEME="agnoster" # bureau mh sorin sunrise avit
 #ZSH_THEME="lambda"
+ZSH_THEME="powerlevel9k/powerlevel9k"
+POWERLEVEL9K_MODE='nerdfont-complete'
 DEFAULT_USER="tunnel"
 
 # Set list of themes to load
@@ -396,6 +398,14 @@ ver ()
 	fi
 }
 
-eval $(thefuck --alias --enable-experimental-instant-mode)
+for key in ${(k)icons[@]}
+do
+    if [[ ! $key =~ 'SEPARATOR' ]]
+    then
+        icons[$key]=" ${icons[$key]} "
+    fi
+done
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#eval $(thefuck --alias --enable-experimental-instant-mode)
+
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
