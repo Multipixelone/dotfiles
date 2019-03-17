@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# Full Graphical Installer for Debian and Derivitives
+sudo apt install ruby python-pip python3 python3-pip steam git vim fish gnome-terminal stow
+
+# Install thefuck for easy command corrections
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+brew install thefuck
+
+# Just get config files
+cd ~/
+mv .vimrc .vimrcold
+stow vim
+stow fish
+stow bin
+stow pics
+stow fonts
+sudo fc-cache -f -v
