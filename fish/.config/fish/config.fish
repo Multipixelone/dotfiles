@@ -98,6 +98,9 @@ alias gpu="prime-select query"
 alias meminfo="free -g -l -t"
 alias top="htop"
 
+# Network Alias :)
+alias ap="sudo create_ap wlx0013ef500f01 wlp2s0 merlin somestaydrywhileothersfeelthepain"
+
 # Add git aliases
 alias gs="git status"
 alias ga="git add"
@@ -112,8 +115,11 @@ alias ports="netstat -tulanp"
 alias wget="wget -c"
 
 # Add ls aliases
-alias la="ls -lAhF --color=always"
-alias ls="ls --color=always"
+#alias la="ls -lAhF --color=always"
+#alias ls="ls --color=always"
+alias ls="colorls"
+alias la="colorls -lA --gs"
+
 
 # Color in less
 alias less="less -R"
