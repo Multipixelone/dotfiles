@@ -5,8 +5,8 @@
 #
 
 # Add to the path environment variable
-set -gx PATH /home/linuxbrew/.linuxbrew/bin $PATH
-set -gx PATH ~/bin $PATH
+#set -gx PATH /home/linuxbrew/.linuxbrew/bin $PATH
+#set -gx PATH ~/bin $PATH
 
 # Add the function to make a backup of a file before editing it
 function vimbak
@@ -98,4 +98,4 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
 # Add thefuck for command checking
-thefuck --alias | source
+#thefuck --alias | source
