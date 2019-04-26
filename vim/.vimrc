@@ -14,24 +14,25 @@ endif
 call plug#begin()
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
-Plug 'sjl/badwolf'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tomtom/tcomment_vim'
+" Plug 'sjl/badwolf'
+" Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'tomtom/tcomment_vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'reedes/vim-colors-pencil'
-Plug 'Valloric/YouCompleteMe'
-Plug 'w0rp/ale'
+" Plug 'reedes/vim-colors-pencil'
+" Plug 'Valloric/YouCompleteMe'
+" Plug 'w0rp/ale'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-fugitive'
 Plug '/usr/local/opt/fzf'
+Plug 'mzlogin/vim-markdown-toc'
 " Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
 Plug 'scrooloose/nerdtree'
 :Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'jiangmiao/auto-pairs'
-Plug 'vim-syntastic/syntastic'
+" Plug 'vim-syntastic/syntastic'
 " Plug 'tpope/vim-markdown'
 Plug 'yggdroot/indentline'
 Plug 'junegunn/seoul256.vim'
@@ -39,6 +40,9 @@ Plug 'amix/vim-zenroom2'
 Plug 'lilydjwg/colorizer'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'godlygeek/tabular'
+Plug 'mzlogin/vim-markdown-toc'
+" Plug 'plasticboy/vim-markdown'
 " Plug 'Yggdroot/LeaderF'
 call plug#end()
 
@@ -79,6 +83,7 @@ endfunction
 autocmd BufNewFile *.rmd 0r ~/tufte.rmd
 " :autocmd BufWritePost *.md silent! execute "!/home/tunnel/Documents/Programs/MDPDF/Pandoc.sh \"%:p\" &>/dev/null" | redraw!
 :autocmd BufNewFile *.rmd :Goyo
+:autocmd FileReadPre *rmd :Goyo
 :autocmd BufNewFile,FileReadPre *.rmd set spell
 :autocmd BufWritePost *.rmd silent execute "!rmd <afile>" | redraw!
 " :autocmd BufWritePost *.rmd silent! execute R -r "rmarkdown::render <afile>" | redraw!
@@ -87,6 +92,7 @@ autocmd BufNewFile *.rmd 0r ~/tufte.rmd
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
+let g:loaded_youcompleteme = 1
 set pastetoggle=<F3>
 
 " Set Shell
