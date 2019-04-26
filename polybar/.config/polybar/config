@@ -347,7 +347,7 @@ label-offline-foreground = ${colors.text}
 label-offline-padding = 1
 
 label-song-maxlen = 70
-label-song =  %title%
+label-song =  %artist% - %title%
 label-song-ellipsis = true
 label-song-background = ${colors.blue}
 label-song-foreground = ${colors.text}
