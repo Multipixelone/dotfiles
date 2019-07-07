@@ -128,6 +128,7 @@
       vlc
       steam
       qbittorrent
+      taskwarrior
  
       ncmpcpp
       screenfetch
