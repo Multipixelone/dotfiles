@@ -70,8 +70,8 @@ alias wget="wget -c"
 # Add ls aliases
 #alias la="ls -lAhF --color=always"
 #alias ls="ls --color=always"
-alias ls="colorls"
-alias la="colorls -lA --gs"
+#alias ls="colorls"
+alias la="ls -lAhf --color=always"
 
 
 # Color in less

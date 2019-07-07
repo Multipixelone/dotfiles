@@ -100,6 +100,8 @@
 
       python36
       dep
+      ruby
+      ruby-gem
 
       # desktop
       gnome3.gnome_terminal
