@@ -85,6 +85,13 @@ alias 666='chmod -R 666'
 alias 755="chmod -R 755"
 alias 777="chmod -R 777"
 
+# Copy Permissions
+#function cpmod --description "copy perm <reference> <destination>"
+#    echo $arg[2..-1]
+#    sudo chown -R --reference=$arg[1] $arg[2]
+#    sudo chmod -R --reference=$arg[1] $arg[2]
+#end
+
 # Add package manager commands
 alias apt="sudo apt"
 alias apt-get="sudo apt"
