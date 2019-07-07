@@ -26,7 +26,7 @@ margin-bottom = 0
 enable-ipc = true
 ;monitor = ${env:MONITOR:eDP1}
 width = 100%
-height = 40
+height = 25
 ;radius = 5.0
 fixed-center = true
 ;override-redirect = true
@@ -56,7 +56,7 @@ font-4 = Font Awesome 5 Brands:pixel=12;4
 font-1 = Material Design Icons:pixelsize=18;4.5
 #font-0 = BlexMono Nerd Font:pixelsize=13;4
 #font-0 = PixelMix:pixelsize=13;4
-font-0 = undefined medium:pixelsize=18;3
+font-0 = undefined medium:pixelsize=13;2.5
 #font-0 = siji:size=13;2
 
 ; OLD MODULES
@@ -178,7 +178,7 @@ format-prefix-foreground = #666
 
 [module/wifi]
 type = internal/network
-interface = wlp2s0
+interface = enp2s0
 interval = 3.0
 ;udspeed-minwidth = 0
 
