@@ -15,7 +15,7 @@ set $mod Mod1
 for_window [class="^.*"] border pixel 3
 # gaps inner 6
 # gaps outer 6
-gaps inner 12
+gaps inner 6
 gaps outer 3
 
 #bindsym $mod+g gaps outer all set 3; gaps inner all set 60
@@ -486,7 +486,7 @@ exec --no-startup-id xinput set-prop "DLL07BE:01 06CB:7A13 Touchpad" "Synaptics 
 #exec --no-startup-id wal -e -t -i ~/Documents/Backgrounds/pink.png
 exec --no-startup-id feh --bg-tile ~/Documents/Backgrounds/gaming-teal.png
 #exec --no-startup-id feh --bg-fill ~/Documents/Backgrounds/Plane.jpg
-exec --no-startup-id xrandr --dpi 180
+#exec --no-startup-id xrandr --dpi 180
 exec --no-startup-id xrdb -merge ~/.Xresources
 #exec --no-startup-id /home/tunnel/.config/polybar/launch.sh
 exec --no-startup-id xset +fp /home/tunnel/.fonts
