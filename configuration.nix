@@ -129,6 +129,7 @@
       steam
       qbittorrent
       taskwarrior
+      zscroll
  
       ncmpcpp
       screenfetch
