@@ -66,10 +66,10 @@ font-0 = undefined medium:pixelsize=13;2.5
 ;modules-right = xkeyboard xbacklight pulseaudio wifi battery memory cpu date power-menu
 
 ; NEW MODULES
-modules-left = rofia mpd i3 xwindow
+modules-left = rofia mpc i3 xwindow
 modules-center = date
 ;modules-right = xkeyboard wifi battery pulseaudio
-modules-right = pulseaudio wifi battery
+modules-right = pulseaudio gmail taskwarrior
 
 tray-position = right
 tray-padding = 0
@@ -327,6 +327,44 @@ animation-charging-padding-right = 1
 ;exec-if = pgrep -x watch
 ;interval = 3
 
+[module/vpn]
+type = custom/script
+exec = echo vpn
+exec-if = pgrep -x openvpn
+interval = 5
+format-underline = #268bd2
+format-prefix = "🖧 "
+format-prefix-foreground = #5b
+
+[module/mpc]
+type = custom/script
+#exec = zscroll -n -u -b "♪ x" -d 0.3 -M "mpc status" -m "playing" -b " " -s 1 -m "paused" -b " " -s 0 "mpc current"
+exec = ~/Code/now-playing-no-icon.sh
+tail = true
+interval = 0
+format-background = ${colors.blue}
+format-foreground = ${colors.text}
+format-padding = 1
+
+[module/taskwarrior]
+interval = 30
+type = custom/script
+exec = ~/Code/task_polybar.sh
+format = <label>
+format-foreground = ${colors.text}
+format-background = ${colors.foreground}
+format-prefix = " "
+click-left = task "$((`cat /tmp/tw_polybar_id`))" done
+
+[module/gmail]
+type = custom/script
+exec = ~/Code/gmail.py --prefix ''
+tail = true
+format-foreground = ${colors.text}
+format-background = ${colors.foreground}
+click-left = xdg-open https://mail.google.com
+format-padding = 1
+
 [module/mpd]
 type = internal/mpd
 
@@ -357,12 +395,11 @@ label-song-padding = 1
 
 label-time-foreground = #777
 
-toggle-on-foreground = #fba922
-toggle-off-foreground = #777
+#toggle-on-foreground = #fba922
+#toggle-off-foreground = #777
 
 [module/power-menu]
 type = custom/menu
-
 label-open = 
 label-close = 
 label-separator = /
