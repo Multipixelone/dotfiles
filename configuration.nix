@@ -34,7 +34,7 @@
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     
   # Enable NVidia driver support
-  nixpkgs.config.allowUnfree = true;
+  #nixpkgs.config.allowUnfree = true;
   #iservices.xserver.videoDrivers = [ "nvidia" ];
   
   # Configure network proxy if necessary
@@ -101,7 +101,6 @@
       python36
       dep
       ruby
-      ruby-gem
 
       # desktop
       gnome3.gnome_terminal
@@ -110,7 +109,10 @@
       gnome3.eog
       gnome3.dconf
       i3lock-color
+      compton
+      dunst      
       feh
+      polybar
       rofi
       arc-theme
       papirus-icon-theme
@@ -165,7 +167,18 @@
       startAgent = true;
     };
   };
-
+  nixpkgs.config = {
+    allowUnfree = true;
+    packageOverrides = pkgs: rec {
+      polybar = pkgs.polybar.override {
+        i3GapsSupport = true;
+        mpdSupport = true;
+        alsaSupport = true;
+        pulseSupport = true;
+        nlSupport = true;
+      };
+    };
+  };
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
@@ -183,6 +196,7 @@
     };
     windowManager = {
       i3.enable = true;
+      i3.package = pkgs.i3-gaps;
     };
   };
   # services.xserver.xkbOptions = "eurosign:e";
